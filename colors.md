@@ -83,23 +83,23 @@
 
 | トークン | 参照先 |
 |---|---|
-| color.surface-container.whisper | {color.neutral-alpha.5} |
-| color.surface-container.subtle | {color.neutral-alpha.10} |
-| color.surface-container.medium | {color.neutral-alpha.15} |
-| color.surface-container.bold | {color.neutral-alpha.20} |
-| color.surface-container.heavy | {color.neutral-alpha.25} |
+| color.surface-container.whisper | `{color.neutral-alpha.5}` |
+| color.surface-container.subtle | `{color.neutral-alpha.10}` |
+| color.surface-container.medium | `{color.neutral-alpha.15}` |
+| color.surface-container.bold | `{color.neutral-alpha.20}` |
+| color.surface-container.heavy | `{color.neutral-alpha.25}` |
 
 #### 例: accent-container
 
 | トークン | 用途例 | 参照先 |
 |---|---|---|
-| color.accent-container.primary.ghost | | {color.accent.primary.5} |
-| color.accent-container.primary.whisper | セカンダリーアクションなど | {color.accent.primary.15} |
-| color.accent-container.primary.subtle | | {color.accent.primary.20} |
-| color.accent-container.primary.soft | | {color.accent.primary.25} |
-| color.accent-container.primary.medium | Primary ActionやSelectedなど | {color.accent.primary.50} |
-| color.accent-container.primary.bold | | {color.accent.primary.60} |
-| color.accent-container.primary.heavy | | {color.accent.primary.70} |
+| color.accent-container.primary.ghost | | `{color.accent.primary.5}` |
+| color.accent-container.primary.whisper | セカンダリーアクションなど | `{color.accent.primary.15}` |
+| color.accent-container.primary.subtle | | `{color.accent.primary.20}` |
+| color.accent-container.primary.soft | | `{color.accent.primary.25}` |
+| color.accent-container.primary.medium | Primary ActionやSelectedなど | `{color.accent.primary.50}` |
+| color.accent-container.primary.bold | | `{color.accent.primary.60}` |
+| color.accent-container.primary.heavy | | `{color.accent.primary.70}` |
 
 ### 特殊な修飾子
 
