@@ -22,6 +22,12 @@
             ]
           },
           {
+            "group": "Foundation",
+            "pages": [
+              "colors"
+            ]
+          },
+          {
             "group": "Customization",
             "pages": [
               "essentials/settings",
