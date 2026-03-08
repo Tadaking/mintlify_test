@@ -3,8 +3,9 @@ title: "Colors"
 description: "色は階層を確立し、ブランディングを強化し、調和を築きます。"
 ---
 
-export const ColorChip = ({ color, token }) => {
+export const ColorChip = ({ color, darkColor, token }) => {
   const [copied, setCopied] = useState(false);
+  const dark = darkColor || color;
   return (
     <span
       className={`color-chip-wrapper${copied ? ' color-chip-copied' : ''}`}
@@ -15,7 +16,8 @@ export const ColorChip = ({ color, token }) => {
       }}
       title={token}
     >
-      <span className="color-chip" style={{ backgroundColor: color }} />
+      <span className="color-chip color-chip--light" style={{ backgroundColor: color }} />
+      <span className="color-chip color-chip--dark" style={{ backgroundColor: dark }} />
       {copied && <span className="color-chip-check">✓</span>}
     </span>
   );
@@ -744,6 +746,8 @@ export const ColorChip = ({ color, token }) => {
     | <ColorChip color="#000000" token="color.accent.pink.100" /> | `#000000` |
   </Tab>
   <Tab title="Lightness-Mode Tokens">
+    {/*  figma: https://www.figma.com/design/PSqBlA9pU7SHYbplxhS8q6/Foundation?node-id=110-160  */}
+
     > データソース: Figma Variables — コレクション "Lightness-mode"
 
     {/*  Figma更新による主な差分（旧colors.mdxとの比較）:
@@ -770,176 +774,176 @@ export const ColorChip = ({ color, token }) => {
 
     ### Surface
 
-    | トークン                               | 参照先                        |
-    | ---------------------------------- | -------------------------- |
-    | color.surface.base.default         | `{color.neutral.0}`        |
-    | color.surface.base.alternative     | `{color.neutral.10}`       |
-    | color.surface.raised.level1        | `{color.neutral.0}`        |
-    | color.surface.raised.level2        | `{color.neutral.10}`       |
-    | color.surface.raised.inverse       | `{color.neutral.90}`       |
-    | color.surface.raised.inverse-fixed | `{color.neutral.90}`       |
-    | color.surface.scrim.default        | `{color.neutral-alpha.25}` |
-    | color.surface.scrim.fixed          | `{color.neutral-alpha.80}` |
-    | color.surface.overlay              | `{color.neutral.0}`        |
-    | color.surface.sunken               | `{color.neutral.10}`       |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#FFFFFF" darkColor="#000000" token="color.surface.base.default" /> | color.surface.base.default | `{color.neutral.0}` | Maps to M3 "surface" role. |
+    | <ColorChip color="#F2F4F6" darkColor="#2A2E32" token="color.surface.base.alternative" /> | color.surface.base.alternative | `{color.neutral.10}` | Maps to M3 "surfaceVariant" role. |
+    | <ColorChip color="#FFFFFF" darkColor="#1B1E21" token="color.surface.raised.level1" /> | color.surface.raised.level1 | `{color.neutral.0}` | — |
+    | <ColorChip color="#F2F4F6" darkColor="#2A2E32" token="color.surface.raised.level2" /> | color.surface.raised.level2 | `{color.neutral.10}` | — |
+    | <ColorChip color="#2A2E32" darkColor="#F8F9FA" token="color.surface.raised.inverse" /> | color.surface.raised.inverse | `{color.neutral.90}` | Maps to M3 "inverseSurface" role. |
+    | <ColorChip color="#2A2E32" darkColor="#090B0D" token="color.surface.raised.inverse-fixed" /> | color.surface.raised.inverse-fixed | `{color.neutral.90}` | — |
+    | <ColorChip color="#00112229" darkColor="#0109108F" token="color.surface.scrim.default" /> | color.surface.scrim.default | `{color.neutral-alpha.25}` | Maps to M3 "scrim" role. |
+    | <ColorChip color="#2F3032E0" token="color.surface.scrim.fixed" /> | color.surface.scrim.fixed | `{color.neutral-alpha.80}` | — |
+    | <ColorChip color="#FFFFFF" darkColor="#1A1E22ED" token="color.surface.overlay" /> | color.surface.overlay | `{color.neutral.0}` | — |
+    | <ColorChip color="#F2F4F6" darkColor="#1B1E21" token="color.surface.sunken" /> | color.surface.sunken | `{color.neutral.10}` | — |
 
     ### Surface Container
 
-    | トークン                                   | 参照先                        |
-    | -------------------------------------- | -------------------------- |
-    | color.surface-container.default        | `{color.neutral.0}`        |
-    | color.surface-container.fixed          | `{color.neutral.0}`        |
-    | color.surface-container.whisper        | `{color.neutral-alpha.5}`  |
-    | color.surface-container.whisper-opaque | `{color.neutral.5}`        |
-    | color.surface-container.subtle         | `{color.neutral-alpha.10}` |
-    | color.surface-container.subtle-opaque  | `{color.neutral.10}`       |
-    | color.surface-container.medium         | `{color.neutral-alpha.15}` |
-    | color.surface-container.medium-opaque  | `{color.neutral.15}`       |
-    | color.surface-container.bold           | `{color.neutral-alpha.20}` |
-    | color.surface-container.heavy          | `{color.neutral-alpha.25}` |
-    | color.surface-container.inverse-subtle | `{color.neutral-alpha.80}` |
-    | color.surface-container.inverse        | `{color.neutral.85}`       |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#FFFFFF" darkColor="#111417" token="color.surface-container.default" /> | color.surface-container.default | `{color.neutral.0}` | Maps to M3 "surfaceContainer" role. |
+    | <ColorChip color="#FFFFFF" token="color.surface-container.fixed" /> | color.surface-container.fixed | `{color.neutral.0}` | — |
+    | <ColorChip color="#00375807" darkColor="#FFFFFF12" token="color.surface-container.whisper" /> | color.surface-container.whisper | `{color.neutral-alpha.5}` | — |
+    | <ColorChip color="#F8F9FA" darkColor="#111417" token="color.surface-container.whisper-opaque" /> | color.surface-container.whisper-opaque | `{color.neutral.5}` | Maps to M3 "surfaceContainerLow" role. |
+    | <ColorChip color="#00234A0D" darkColor="#FFFFFF21" token="color.surface-container.subtle" /> | color.surface-container.subtle | `{color.neutral-alpha.10}` | — |
+    | <ColorChip color="#F2F4F6" darkColor="#1B1E21" token="color.surface-container.subtle-opaque" /> | color.surface-container.subtle-opaque | `{color.neutral.10}` | Maps to M3 "surfaceContainerHigh" role. |
+    | <ColorChip color="#00234A13" darkColor="#FFFFFF29" token="color.surface-container.medium" /> | color.surface-container.medium | `{color.neutral-alpha.15}` | — |
+    | <ColorChip color="#ECEFF2" darkColor="#2A2E32" token="color.surface-container.medium-opaque" /> | color.surface-container.medium-opaque | `{color.neutral.15}` | Maps to M3 "surfaceContainerHighest" role. |
+    | <ColorChip color="#001A3D1C" darkColor="#FFFFFF3D" token="color.surface-container.bold" /> | color.surface-container.bold | `{color.neutral-alpha.20}` | — |
+    | <ColorChip color="#00112229" darkColor="#FFFFFF52" token="color.surface-container.heavy" /> | color.surface-container.heavy | `{color.neutral-alpha.25}` | — |
+    | <ColorChip color="#2F3032E0" darkColor="#FFFFFFCC" token="color.surface-container.inverse-subtle" /> | color.surface-container.inverse-subtle | `{color.neutral-alpha.80}` | — |
+    | <ColorChip color="#3D4146" darkColor="#F2F4F6" token="color.surface-container.inverse" /> | color.surface-container.inverse | `{color.neutral.85}` | — |
 
     ### on Surface
 
-    | トークン                           | 参照先                        | 備考            |
-    | ------------------------------ | -------------------------- | ------------- |
-    | color.on-surface.ghost         | `{color.neutral-alpha.30}` | Disabledなど    |
-    | color.on-surface.whisper       | `{color.neutral-alpha.40}` | Placeholderなど |
-    | color.on-surface.subtle        | `{color.neutral.60}`       | セカンダリテキストなど   |
-    | color.on-surface.medium        | `{color.neutral.80}`       | テキスト          |
-    | color.on-surface.bold          | `{color.neutral.90}`       | 見出しなど         |
-    | color.on-surface.inverse       | `{color.neutral.0}`        | —             |
-    | color.on-surface.inverse-fixed | `{color.neutral.0}`        | —             |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#010B173F" darkColor="#FFFFFF3D" token="color.on-surface.ghost" /> | color.on-surface.ghost | `{color.neutral-alpha.30}` | Disabledなど |
+    | <ColorChip color="#0109115D" darkColor="#FFFFFF3D" token="color.on-surface.whisper" /> | color.on-surface.whisper | `{color.neutral-alpha.40}` | Placeholderなど |
+    | <ColorChip color="#717579" darkColor="#E3E6EA" token="color.on-surface.subtle" /> | color.on-surface.subtle | `{color.neutral.60}` | Maps to M3 "onSurfaceVariant" role. |
+    | <ColorChip color="#505459" darkColor="#F2F4F6" token="color.on-surface.medium" /> | color.on-surface.medium | `{color.neutral.80}` | テキスト |
+    | <ColorChip color="#2A2E32" darkColor="#FFFFFF" token="color.on-surface.bold" /> | color.on-surface.bold | `{color.neutral.90}` | Maps to M3 "onSurface" role. |
+    | <ColorChip color="#FFFFFF" darkColor="#2A2E32" token="color.on-surface.inverse" /> | color.on-surface.inverse | `{color.neutral.0}` | Maps to M3 "inverseOnSurface" role. |
+    | <ColorChip color="#FFFFFF" token="color.on-surface.inverse-fixed" /> | color.on-surface.inverse-fixed | `{color.neutral.0}` | — |
 
     ### Border
 
-    | トークン                       | 参照先                        |
-    | -------------------------- | -------------------------- |
-    | color.border.whisper       | `{color.neutral-alpha.15}` |
-    | color.border.subtle        | `{color.neutral-alpha.20}` |
-    | color.border.medium        | `{color.neutral-alpha.30}` |
-    | color.border.bold          | `{color.neutral-alpha.60}` |
-    | color.border.inverse-soft  | `{color.white-alpha.80}`   |
-    | color.border.inverse       | `{color.white-alpha.100}`  |
-    | color.border.inverse-fixed | `{color.white-alpha.100}`  |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#00234A13" darkColor="#FFFFFF21" token="color.border.whisper" /> | color.border.whisper | `{color.neutral-alpha.15}` | — |
+    | <ColorChip color="#001A3D1C" darkColor="#FFFFFF29" token="color.border.subtle" /> | color.border.subtle | `{color.neutral-alpha.20}` | Maps to M3 "outlineVariant" role. |
+    | <ColorChip color="#010B173F" darkColor="#FFFFFF52" token="color.border.medium" /> | color.border.medium | `{color.neutral-alpha.30}` | Maps to M3 "outline" role. |
+    | <ColorChip color="#0109108F" darkColor="#FFFFFF7A" token="color.border.bold" /> | color.border.bold | `{color.neutral-alpha.60}` | — |
+    | <ColorChip color="#FFFFFFCC" darkColor="#2F3032E0" token="color.border.inverse-soft" /> | color.border.inverse-soft | `{color.white-alpha.80}` | — |
+    | <ColorChip color="#FFFFFF" darkColor="#000000" token="color.border.inverse" /> | color.border.inverse | `{color.white-alpha.100}` | — |
+    | <ColorChip color="#FFFFFF" token="color.border.inverse-fixed" /> | color.border.inverse-fixed | `{color.white-alpha.100}` | — |
 
     ### Accent
 
     #### Accent
 
-    | トークン                        | 参照先                         |
-    | --------------------------- | --------------------------- |
-    | color.accent.primary.medium | `{color.accent.primary.60}` |
-    | color.accent.primary.bold   | `{color.accent.primary.70}` |
-    | color.accent.primary.fixed  | `{color.accent.primary.60}` |
-    | color.accent.link.default   | `{color.accent.teal.60}`    |
-    | color.accent.link.hover     | `{color.accent.teal.60}`    |
-    | color.accent.link.visited   | `{color.accent.teal.50}`    |
-    | color.accent.link.disabled  | `{color.neutral.50}`        |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#028D1D" darkColor="#82DB82" token="color.accent.primary.medium" /> | color.accent.primary.medium | `{color.accent.primary.60}` | — |
+    | <ColorChip color="#027E19" darkColor="#AEEBAD" token="color.accent.primary.bold" /> | color.accent.primary.bold | `{color.accent.primary.70}` | — |
+    | <ColorChip color="#028D1D" token="color.accent.primary.fixed" /> | color.accent.primary.fixed | `{color.accent.primary.60}` | — |
+    | <ColorChip color="#01858B" darkColor="#13767A" token="color.accent.link.default" /> | color.accent.link.default | `{color.accent.teal.60}` | — |
+    | <ColorChip color="#01858B" darkColor="#13767A" token="color.accent.link.hover" /> | color.accent.link.hover | `{color.accent.teal.60}` | — |
+    | <ColorChip color="#1AA1A7" token="color.accent.link.visited" /> | color.accent.link.visited | `{color.accent.teal.50}` | — |
+    | <ColorChip color="#8A8E92" token="color.accent.link.disabled" /> | color.accent.link.disabled | `{color.neutral.50}` | — |
 
     #### Accent Container
 
-    | トークン                                   | 参照先                         | 備考                        |
-    | -------------------------------------- | --------------------------- | ------------------------- |
-    | color.accent-container.primary.ghost   | `{color.accent.primary.5}`  | —                         |
-    | color.accent-container.primary.whisper | `{color.accent.primary.15}` | セカンダリーアクションなど             |
-    | color.accent-container.primary.subtle  | `{color.accent.primary.20}` | —                         |
-    | color.accent-container.primary.soft    | `{color.accent.primary.25}` | —                         |
-    | color.accent-container.primary.medium  | `{color.accent.primary.50}` | Primary ActionやSelectedなど |
-    | color.accent-container.primary.bold    | `{color.accent.primary.60}` | —                         |
-    | color.accent-container.primary.heavy   | `{color.accent.primary.70}` | —                         |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#F3FCF3" darkColor="#002603" token="color.accent-container.primary.ghost" /> | color.accent-container.primary.ghost | `{color.accent.primary.5}` | — |
+    | <ColorChip color="#DBF8DB" darkColor="#003906" token="color.accent-container.primary.whisper" /> | color.accent-container.primary.whisper | `{color.accent.primary.15}` | Maps to M3 "secondaryContainer" role. |
+    | <ColorChip color="#CAF4C9" darkColor="#01500D" token="color.accent-container.primary.subtle" /> | color.accent-container.primary.subtle | `{color.accent.primary.20}` | Maps to M3 "primaryContainer" role. |
+    | <ColorChip color="#A6EEA6" darkColor="#076615" token="color.accent-container.primary.soft" /> | color.accent-container.primary.soft | `{color.accent.primary.25}` | — |
+    | <ColorChip color="#00A724" darkColor="#028D1D" token="color.accent-container.primary.medium" /> | color.accent-container.primary.medium | `{color.accent.primary.50}` | Maps to M3 "primary" role. |
+    | <ColorChip color="#028D1D" darkColor="#00A724" token="color.accent-container.primary.bold" /> | color.accent-container.primary.bold | `{color.accent.primary.60}` | — |
+    | <ColorChip color="#027E19" darkColor="#43C24A" token="color.accent-container.primary.heavy" /> | color.accent-container.primary.heavy | `{color.accent.primary.70}` | — |
 
     #### Accent Border
 
-    | トークン                                | 参照先                         |
-    | ----------------------------------- | --------------------------- |
-    | color.accent-border.primary.whisper | `{color.accent.primary.20}` |
-    | color.accent-border.primary.subtle  | `{color.accent.primary.25}` |
-    | color.accent-border.primary.medium  | `{color.accent.primary.50}` |
-    | color.accent-border.primary.bold    | `{color.accent.primary.60}` |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#CAF4C9" darkColor="#076615" token="color.accent-border.primary.whisper" /> | color.accent-border.primary.whisper | `{color.accent.primary.20}` | — |
+    | <ColorChip color="#A6EEA6" darkColor="#028D1D" token="color.accent-border.primary.subtle" /> | color.accent-border.primary.subtle | `{color.accent.primary.25}` | — |
+    | <ColorChip color="#00A724" darkColor="#82DB82" token="color.accent-border.primary.medium" /> | color.accent-border.primary.medium | `{color.accent.primary.50}` | — |
+    | <ColorChip color="#028D1D" darkColor="#AEEBAD" token="color.accent-border.primary.bold" /> | color.accent-border.primary.bold | `{color.accent.primary.60}` | — |
 
     #### On Accent
 
-    | トークン                           | 参照先                         |
-    | ------------------------------ | --------------------------- |
-    | color.on-accent.default        | `{color.neutral.0}`         |
-    | color.on-accent.primary.medium | `{color.accent.primary.60}` |
-    | color.on-accent.primary.bold   | `{color.accent.primary.70}` |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#FFFFFF" token="color.on-accent.default" /> | color.on-accent.default | `{color.neutral.0}` | Maps to M3 "onPrimary" role. |
+    | <ColorChip color="#028D1D" darkColor="#82DB82" token="color.on-accent.primary.medium" /> | color.on-accent.primary.medium | `{color.accent.primary.60}` | Maps to M3 "onSecondaryContainer" role. |
+    | <ColorChip color="#027E19" darkColor="#AEEBAD" token="color.on-accent.primary.bold" /> | color.on-accent.primary.bold | `{color.accent.primary.70}` | Maps to M3 "onPrimaryContainer" role. |
 
     ### Feedback
 
     #### Feedback
 
-    | トークン                            | 参照先                       |
-    | ------------------------------- | ------------------------- |
-    | color.feedback.notice.medium    | `{color.accent.amber.60}` |
-    | color.feedback.notice.bold      | `{color.accent.amber.70}` |
-    | color.feedback.assertive.medium | `{color.accent.red.60}`   |
-    | color.feedback.assertive.bold   | `{color.accent.red.70}`   |
-    | color.feedback.info.medium      | `{color.accent.cyan.60}`  |
-    | color.feedback.info.bold        | `{color.accent.cyan.70}`  |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#8D7102" darkColor="#E9BE05" token="color.feedback.notice.medium" /> | color.feedback.notice.medium | `{color.accent.amber.60}` | — |
+    | <ColorChip color="#7D6400" darkColor="#FFE595" token="color.feedback.notice.bold" /> | color.feedback.notice.bold | `{color.accent.amber.70}` | — |
+    | <ColorChip color="#DA0900" darkColor="#FFA99A" token="color.feedback.assertive.medium" /> | color.feedback.assertive.medium | `{color.accent.red.60}` | — |
+    | <ColorChip color="#BE1E12" darkColor="#FFCBC1" token="color.feedback.assertive.bold" /> | color.feedback.assertive.bold | `{color.accent.red.70}` | — |
+    | <ColorChip color="#037FAC" darkColor="#71CFFF" token="color.feedback.info.medium" /> | color.feedback.info.medium | `{color.accent.cyan.60}` | — |
+    | <ColorChip color="#127098" darkColor="#AEE1FF" token="color.feedback.info.bold" /> | color.feedback.info.bold | `{color.accent.cyan.70}` | — |
 
     {/*  旧バージョンに存在した feedback.positive.medium (green.70) / feedback.positive.bold (green.80) は削除されています  */}
 
     #### Feedback Container
 
-    | トークン                                       | 参照先                       |
-    | ------------------------------------------ | ------------------------- |
-    | color.feedback-container.positive.ghost    | `{color.accent.green.5}`  |
-    | color.feedback-container.positive.whisper  | `{color.accent.green.10}` |
-    | color.feedback-container.positive.subtle   | `{color.accent.green.15}` |
-    | color.feedback-container.positive.medium   | `{color.accent.green.50}` |
-    | color.feedback-container.assertive.ghost   | `{color.accent.red.5}`    |
-    | color.feedback-container.assertive.whisper | `{color.accent.red.10}`   |
-    | color.feedback-container.assertive.subtle  | `{color.accent.red.15}`   |
-    | color.feedback-container.assertive.soft    | `{color.accent.red.20}`   |
-    | color.feedback-container.assertive.medium  | `{color.accent.red.50}`   |
-    | color.feedback-container.assertive.bold    | `{color.accent.red.60}`   |
-    | color.feedback-container.assertive.heavy   | `{color.accent.red.70}`   |
-    | color.feedback-container.notice.ghost      | `{color.accent.amber.5}`  |
-    | color.feedback-container.notice.whisper    | `{color.accent.amber.10}` |
-    | color.feedback-container.notice.subtle     | `{color.accent.amber.15}` |
-    | color.feedback-container.notice.medium     | `{color.accent.amber.25}` |
-    | color.feedback-container.info.ghost        | `{color.accent.cyan.5}`   |
-    | color.feedback-container.info.whisper      | `{color.accent.cyan.10}`  |
-    | color.feedback-container.info.subtle       | `{color.accent.cyan.15}`  |
-    | color.feedback-container.info.medium       | `{color.accent.cyan.50}`  |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#F1FDF4" darkColor="#002511" token="color.feedback-container.positive.ghost" /> | color.feedback-container.positive.ghost | `{color.accent.green.5}` | — |
+    | <ColorChip color="#E7F9EC" darkColor="#004F2A" token="color.feedback-container.positive.whisper" /> | color.feedback-container.positive.whisper | `{color.accent.green.10}` | — |
+    | <ColorChip color="#D8F8E2" darkColor="#006538" token="color.feedback-container.positive.subtle" /> | color.feedback-container.positive.subtle | `{color.accent.green.15}` | — |
+    | <ColorChip color="#00A55E" darkColor="#007C45" token="color.feedback-container.positive.medium" /> | color.feedback-container.positive.medium | `{color.accent.green.50}` | — |
+    | <ColorChip color="#FEF7F6" darkColor="#400000" token="color.feedback-container.assertive.ghost" /> | color.feedback-container.assertive.ghost | `{color.accent.red.5}` | Maps to M3 "errorContainer" role. |
+    | <ColorChip color="#FFF0EF" darkColor="#5A0703" token="color.feedback-container.assertive.whisper" /> | color.feedback-container.assertive.whisper | `{color.accent.red.10}` | — |
+    | <ColorChip color="#FFE9E4" darkColor="#7E0601" token="color.feedback-container.assertive.subtle" /> | color.feedback-container.assertive.subtle | `{color.accent.red.15}` | — |
+    | <ColorChip color="#FFDDD8" darkColor="#9E0E05" token="color.feedback-container.assertive.soft" /> | color.feedback-container.assertive.soft | `{color.accent.red.20}` | — |
+    | <ColorChip color="#F43828" darkColor="#BE1E12" token="color.feedback-container.assertive.medium" /> | color.feedback-container.assertive.medium | `{color.accent.red.50}` | Maps to M3 "error" role. |
+    | <ColorChip color="#DA0900" token="color.feedback-container.assertive.bold" /> | color.feedback-container.assertive.bold | `{color.accent.red.60}` | — |
+    | <ColorChip color="#BE1E12" darkColor="#F82F20" token="color.feedback-container.assertive.heavy" /> | color.feedback-container.assertive.heavy | `{color.accent.red.70}` | — |
+    | <ColorChip color="#FFF9E6" darkColor="#261D00" token="color.feedback-container.notice.ghost" /> | color.feedback-container.notice.ghost | `{color.accent.amber.5}` | — |
+    | <ColorChip color="#FFF4D2" darkColor="#392C00" token="color.feedback-container.notice.whisper" /> | color.feedback-container.notice.whisper | `{color.accent.amber.10}` | — |
+    | <ColorChip color="#FFEEBA" darkColor="#665200" token="color.feedback-container.notice.subtle" /> | color.feedback-container.notice.subtle | `{color.accent.amber.15}` | — |
+    | <ColorChip color="#FFD547" darkColor="#7D6400" token="color.feedback-container.notice.medium" /> | color.feedback-container.notice.medium | `{color.accent.amber.25}` | — |
+    | <ColorChip color="#F3FBFE" darkColor="#002131" token="color.feedback-container.info.ghost" /> | color.feedback-container.info.ghost | `{color.accent.cyan.5}` | — |
+    | <ColorChip color="#E7F7FF" darkColor="#053246" token="color.feedback-container.info.whisper" /> | color.feedback-container.info.whisper | `{color.accent.cyan.10}` | — |
+    | <ColorChip color="#DDF2FE" darkColor="#085B7E" token="color.feedback-container.info.subtle" /> | color.feedback-container.info.subtle | `{color.accent.cyan.15}` | — |
+    | <ColorChip color="#129ACF" darkColor="#127098" token="color.feedback-container.info.medium" /> | color.feedback-container.info.medium | `{color.accent.cyan.50}` | — |
 
     #### Feedback Border
 
-    | トークン                                   | 参照先                       |
-    | -------------------------------------- | ------------------------- |
-    | color.feedback-border.postive.subtle   | `{color.accent.green.30}` |
-    | color.feedback-border.postive.medium   | `{color.accent.green.40}` |
-    | color.feedback-border.postive.bold     | `{color.accent.green.50}` |
-    | color.feedback-border.assertive.subtle | `{color.accent.red.30}`   |
-    | color.feedback-border.assertive.medium | `{color.accent.red.40}`   |
-    | color.feedback-border.assertive.bold   | `{color.accent.red.50}`   |
-    | color.feedback-border.notice.subtle    | `{color.accent.amber.25}` |
-    | color.feedback-border.notice.medium    | `{color.accent.amber.40}` |
-    | color.feedback-border.notice.bold      | `{color.accent.amber.50}` |
-    | color.feedback-border.info.subtle      | `{color.accent.cyan.30}`  |
-    | color.feedback-border.info.medium      | `{color.accent.cyan.40}`  |
-    | color.feedback-border.info.bold        | `{color.accent.cyan.50}`  |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#6EDD9A" darkColor="#007C45" token="color.feedback-border.postive.subtle" /> | color.feedback-border.postive.subtle | `{color.accent.green.30}` | — |
+    | <ColorChip color="#33C176" darkColor="#00A55E" token="color.feedback-border.postive.medium" /> | color.feedback-border.postive.medium | `{color.accent.green.40}` | — |
+    | <ColorChip color="#00A55E" darkColor="#6EDD9A" token="color.feedback-border.postive.bold" /> | color.feedback-border.postive.bold | `{color.accent.green.50}` | — |
+    | <ColorChip color="#FFA99A" darkColor="#BE1E12" token="color.feedback-border.assertive.subtle" /> | color.feedback-border.assertive.subtle | `{color.accent.red.30}` | — |
+    | <ColorChip color="#FF735F" darkColor="#DA0900" token="color.feedback-border.assertive.medium" /> | color.feedback-border.assertive.medium | `{color.accent.red.40}` | — |
+    | <ColorChip color="#F43828" darkColor="#FFA99A" token="color.feedback-border.assertive.bold" /> | color.feedback-border.assertive.bold | `{color.accent.red.50}` | — |
+    | <ColorChip color="#FFD547" darkColor="#7D6400" token="color.feedback-border.notice.subtle" /> | color.feedback-border.notice.subtle | `{color.accent.amber.25}` | — |
+    | <ColorChip color="#C6A002" darkColor="#AA8A04" token="color.feedback-border.notice.medium" /> | color.feedback-border.notice.medium | `{color.accent.amber.40}` | — |
+    | <ColorChip color="#AA8A04" darkColor="#E9BE05" token="color.feedback-border.notice.bold" /> | color.feedback-border.notice.bold | `{color.accent.amber.50}` | — |
+    | <ColorChip color="#71CFFF" darkColor="#127098" token="color.feedback-border.info.subtle" /> | color.feedback-border.info.subtle | `{color.accent.cyan.30}` | — |
+    | <ColorChip color="#16B2F0" darkColor="#129ACF" token="color.feedback-border.info.medium" /> | color.feedback-border.info.medium | `{color.accent.cyan.40}` | — |
+    | <ColorChip color="#129ACF" darkColor="#71CFFF" token="color.feedback-border.info.bold" /> | color.feedback-border.info.bold | `{color.accent.cyan.50}` | — |
 
     #### On Feedback
 
-    | トークン                        | 参照先                       |
-    | --------------------------- | ------------------------- |
-    | color.on-feedback.inverse   | `{color.neutral.0}`       |
-    | color.on-feedback.positive  | `{color.accent.green.60}` |
-    | color.on-feedback.assertive | `{color.accent.red.60}`   |
-    | color.on-feedback.notice    | `{color.accent.amber.70}` |
-    | color.on-feedback.info      | `{color.accent.cyan.70}`  |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#FFFFFF" token="color.on-feedback.inverse" /> | color.on-feedback.inverse | `{color.neutral.0}` | Maps to M3 "onError" role |
+    | <ColorChip color="#018B4F" darkColor="#E7F9EC" token="color.on-feedback.positive" /> | color.on-feedback.positive | `{color.accent.green.60}` | — |
+    | <ColorChip color="#DA0900" darkColor="#FFF0EF" token="color.on-feedback.assertive" /> | color.on-feedback.assertive | `{color.accent.red.60}` | Maps to M3 "onErrorContainer" role. |
+    | <ColorChip color="#7D6400" darkColor="#FFF4D2" token="color.on-feedback.notice" /> | color.on-feedback.notice | `{color.accent.amber.70}` | — |
+    | <ColorChip color="#127098" darkColor="#E7F7FF" token="color.on-feedback.info" /> | color.on-feedback.info | `{color.accent.cyan.70}` | — |
 
     ### Shadow
 
-    | トークン                 | 参照先                        | 備考                                |
-    | -------------------- | -------------------------- | --------------------------------- |
-    | color.shadow.border  | `{color.neutral-alpha.10}` | Border Shadow — 境界定義用の薄い影 (5%)    |
-    | color.shadow.ambient | `{color.neutral-alpha.15}` | Ambient Shadow — 環境光による柔らかい影 (8%) |
-    | color.shadow.key     | `{color.neutral-alpha.25}` | Key Shadow — 指向性光による最も濃い影 (16%)   |
+    | カラー | トークン | 参照先 | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#00234A0D" darkColor="#00234A12" token="color.shadow.border" /> | color.shadow.border | `{color.neutral-alpha.10}` | Border Shadow — 境界定義用の薄い影 (5%) |
+    | <ColorChip color="#00234A13" darkColor="#010B1740" token="color.shadow.ambient" /> | color.shadow.ambient | `{color.neutral-alpha.15}` | Ambient Shadow — 環境光による柔らかい影 (8%) |
+    | <ColorChip color="#00112229" darkColor="#01091175" token="color.shadow.key" /> | color.shadow.key | `{color.neutral-alpha.25}` | Key Shadow — 指向性光による最も濃い影 (16%) |
 
     ### opacity
 
@@ -948,6 +952,8 @@ export const ColorChip = ({ color, token }) => {
     | disabled | `40` |
   </Tab>
   <Tab title="Component Tokens">
+    {/*  figma: https://www.figma.com/design/PSqBlA9pU7SHYbplxhS8q6/Foundation?node-id=110-160  */}
+
     > データソース: Figma Variables — コレクション "Component"
 
     Component TokensはLightness-Mode Tokensを参照します。Lightness-Modeレイヤーを介して、自動的にライト/ダーク値に解決されます。
@@ -965,71 +971,71 @@ export const ColorChip = ({ color, token }) => {
 
     ### Button
 
-    | トークン                                                  | 参照先（LM）                                        |
-    | ----------------------------------------------------- | ---------------------------------------------- |
-    | color.button.primary.background.default               | `{color.accent-container.primary.medium}`      |
-    | color.button.primary.background.hover                 | `{color.accent-container.primary.bold}`        |
-    | color.button.primary.background.pressed               | `{color.accent-container.primary.heavy}`       |
-    | color.button.primary.background.destractive.default   | `{color.feedback-container.assertive.medium}`  |
-    | color.button.primary.background.destractive.hover     | `{color.feedback-container.assertive.bold}`    |
-    | color.button.primary.background.destractive.pressed   | `{color.feedback-container.assertive.heavy}`   |
-    | color.button.primary.text                             | `{color.on-accent.default}`                    |
-    | color.button.secondary.background.default             | `{color.accent-container.primary.whisper}`     |
-    | color.button.secondary.background.hover               | `{color.accent-container.primary.subtle}`      |
-    | color.button.secondary.background.pressed             | `{color.accent-container.primary.soft}`        |
-    | color.button.secondary.text                           | `{color.on-accent.primary.medium}`             |
-    | color.button.secondary.background.destractive.default | `{color.feedback-container.assertive.whisper}` |
-    | color.button.secondary.background.destractive.hover   | `{color.feedback-container.assertive.subtle}`  |
-    | color.button.secondary.background.destractive.pressed | `{color.feedback-container.assertive.soft}`    |
-    | color.button.secondary.text.destractive               | `{color.on-feedback.assertive}`                |
-    | color.button.neutral.background.default               | `{color.surface-container.medium}`             |
-    | color.button.neutral.background.hover                 | `{color.surface-container.bold}`               |
-    | color.button.neutral.background.pressed               | `{color.surface-container.heavy}`              |
-    | color.button.neutral.text.default                     | `{color.on-surface.medium}`                    |
-    | color.button.neutral.text.destractive                 | `{color.feedback.assertive.bold}`              |
-    | color.button.ghost.background.default                 | `{color.neutral-alpha.0}`                      |
-    | color.button.ghost.background.hover                   | `{color.surface-container.subtle}`             |
-    | color.button.ghost.background.pressed                 | `{color.surface-container.bold}`               |
-    | color.button.ghost.text                               | `{color.on-surface.medium}`                    |
+    | カラー | トークン | 参照先（LM） | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#00A724" darkColor="#028D1D" token="color.button.primary.background.default" /> | color.button.primary.background.default | `{color.accent-container.primary.medium}` | — |
+    | <ColorChip color="#028D1D" darkColor="#00A724" token="color.button.primary.background.hover" /> | color.button.primary.background.hover | `{color.accent-container.primary.bold}` | — |
+    | <ColorChip color="#027E19" darkColor="#43C24A" token="color.button.primary.background.pressed" /> | color.button.primary.background.pressed | `{color.accent-container.primary.heavy}` | — |
+    | <ColorChip color="#F43828" darkColor="#BE1E12" token="color.button.primary.background.destractive.default" /> | color.button.primary.background.destractive.default | `{color.feedback-container.assertive.medium}` | — |
+    | <ColorChip color="#DA0900" token="color.button.primary.background.destractive.hover" /> | color.button.primary.background.destractive.hover | `{color.feedback-container.assertive.bold}` | — |
+    | <ColorChip color="#BE1E12" darkColor="#F82F20" token="color.button.primary.background.destractive.pressed" /> | color.button.primary.background.destractive.pressed | `{color.feedback-container.assertive.heavy}` | — |
+    | <ColorChip color="#FFFFFF" token="color.button.primary.text" /> | color.button.primary.text | `{color.on-accent.default}` | — |
+    | <ColorChip color="#DBF8DB" darkColor="#003906" token="color.button.secondary.background.default" /> | color.button.secondary.background.default | `{color.accent-container.primary.whisper}` | — |
+    | <ColorChip color="#CAF4C9" darkColor="#01500D" token="color.button.secondary.background.hover" /> | color.button.secondary.background.hover | `{color.accent-container.primary.subtle}` | — |
+    | <ColorChip color="#A6EEA6" darkColor="#076615" token="color.button.secondary.background.pressed" /> | color.button.secondary.background.pressed | `{color.accent-container.primary.soft}` | — |
+    | <ColorChip color="#028D1D" darkColor="#82DB82" token="color.button.secondary.text" /> | color.button.secondary.text | `{color.on-accent.primary.medium}` | — |
+    | <ColorChip color="#FFF0EF" darkColor="#5A0703" token="color.button.secondary.background.destractive.default" /> | color.button.secondary.background.destractive.default | `{color.feedback-container.assertive.whisper}` | — |
+    | <ColorChip color="#FFE9E4" darkColor="#7E0601" token="color.button.secondary.background.destractive.hover" /> | color.button.secondary.background.destractive.hover | `{color.feedback-container.assertive.subtle}` | — |
+    | <ColorChip color="#FFDDD8" darkColor="#9E0E05" token="color.button.secondary.background.destractive.pressed" /> | color.button.secondary.background.destractive.pressed | `{color.feedback-container.assertive.soft}` | — |
+    | <ColorChip color="#DA0900" darkColor="#FFF0EF" token="color.button.secondary.text.destractive" /> | color.button.secondary.text.destractive | `{color.on-feedback.assertive}` | — |
+    | <ColorChip color="#00234A13" darkColor="#FFFFFF29" token="color.button.neutral.background.default" /> | color.button.neutral.background.default | `{color.surface-container.medium}` | — |
+    | <ColorChip color="#001A3D1C" darkColor="#FFFFFF3D" token="color.button.neutral.background.hover" /> | color.button.neutral.background.hover | `{color.surface-container.bold}` | — |
+    | <ColorChip color="#00112229" darkColor="#FFFFFF52" token="color.button.neutral.background.pressed" /> | color.button.neutral.background.pressed | `{color.surface-container.heavy}` | — |
+    | <ColorChip color="#505459" darkColor="#F2F4F6" token="color.button.neutral.text.default" /> | color.button.neutral.text.default | `{color.on-surface.medium}` | — |
+    | <ColorChip color="#BE1E12" darkColor="#FFCBC1" token="color.button.neutral.text.destractive" /> | color.button.neutral.text.destractive | `{color.feedback.assertive.bold}` | — |
+    | <ColorChip color="#00375800" token="color.button.ghost.background.default" /> | color.button.ghost.background.default | `{color.neutral-alpha.0}` | — |
+    | <ColorChip color="#00234A0D" darkColor="#FFFFFF21" token="color.button.ghost.background.hover" /> | color.button.ghost.background.hover | `{color.surface-container.subtle}` | — |
+    | <ColorChip color="#001A3D1C" darkColor="#FFFFFF3D" token="color.button.ghost.background.pressed" /> | color.button.ghost.background.pressed | `{color.surface-container.bold}` | — |
+    | <ColorChip color="#505459" darkColor="#F2F4F6" token="color.button.ghost.text" /> | color.button.ghost.text | `{color.on-surface.medium}` | — |
 
     ### Input
 
-    | トークン                                    | 参照先（LM）                                        |
-    | --------------------------------------- | ---------------------------------------------- |
-    | color.input.background                  | `{color.surface-container.default}`            |
-    | color.input.background.alternative      | `{color.surface-container.subtle}`             |
-    | color.input.background.alternativeHover | `{color.surface-container.medium}`             |
-    | color.input.background.error            | `{color.feedback-container.assertive.whisper}` |
-    | color.input.border                      | `{color.border.medium}`                        |
-    | color.input.border.hover                | `{color.border.bold}`                          |
-    | color.input.border.error                | `{color.feedback-border.assertive.medium}`     |
-    | color.input.text.label                  | `{color.on-surface.medium}`                    |
-    | color.input.text.value                  | `{color.on-surface.bold}`                      |
-    | color.input.text.placeholder            | `{color.on-surface.whisper}`                   |
-    | color.input.text.affix                  | `{color.on-surface.subtle}`                    |
-    | color.input.text.triggerIcon            | `{color.on-surface.medium}`                    |
+    | カラー | トークン | 参照先（LM） | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#FFFFFF" darkColor="#111417" token="color.input.background" /> | color.input.background | `{color.surface-container.default}` | — |
+    | <ColorChip color="#00234A0D" darkColor="#FFFFFF21" token="color.input.background.alternative" /> | color.input.background.alternative | `{color.surface-container.subtle}` | — |
+    | <ColorChip color="#00234A13" darkColor="#FFFFFF29" token="color.input.background.alternativeHover" /> | color.input.background.alternativeHover | `{color.surface-container.medium}` | — |
+    | <ColorChip color="#FFF0EF" darkColor="#5A0703" token="color.input.background.error" /> | color.input.background.error | `{color.feedback-container.assertive.whisper}` | — |
+    | <ColorChip color="#010B173F" darkColor="#FFFFFF52" token="color.input.border" /> | color.input.border | `{color.border.medium}` | — |
+    | <ColorChip color="#0109108F" darkColor="#FFFFFF7A" token="color.input.border.hover" /> | color.input.border.hover | `{color.border.bold}` | — |
+    | <ColorChip color="#FF735F" darkColor="#DA0900" token="color.input.border.error" /> | color.input.border.error | `{color.feedback-border.assertive.medium}` | — |
+    | <ColorChip color="#505459" darkColor="#F2F4F6" token="color.input.text.label" /> | color.input.text.label | `{color.on-surface.medium}` | — |
+    | <ColorChip color="#2A2E32" darkColor="#FFFFFF" token="color.input.text.value" /> | color.input.text.value | `{color.on-surface.bold}` | — |
+    | <ColorChip color="#0109115D" darkColor="#FFFFFF3D" token="color.input.text.placeholder" /> | color.input.text.placeholder | `{color.on-surface.whisper}` | — |
+    | <ColorChip color="#717579" darkColor="#E3E6EA" token="color.input.text.affix" /> | color.input.text.affix | `{color.on-surface.subtle}` | — |
+    | <ColorChip color="#505459" darkColor="#F2F4F6" token="color.input.text.triggerIcon" /> | color.input.text.triggerIcon | `{color.on-surface.medium}` | — |
 
     ### Choice
 
-    | トークン                             | 参照先（LM）                                       |
-    | -------------------------------- | --------------------------------------------- |
-    | color.choice.background.default  | `{color.surface-container.subtle}`            |
-    | color.choice.background.selected | `{color.accent-container.primary.medium}`     |
-    | color.choice.background.error    | `{color.feedback-container.assertive.medium}` |
-    | color.choice.border.default      | `{color.border.medium}`                       |
-    | color.choice.border.hover        | `{color.border.bold}`                         |
-    | color.choice.border.selected     | `{color.accent-border.primary.medium}`        |
-    | color.choice.border.error        | `{color.feedback-border.assertive.bold}`      |
-    | color.choice.mark.default        | `{color.on-accent.default}`                   |
+    | カラー | トークン | 参照先（LM） | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#00234A0D" darkColor="#FFFFFF21" token="color.choice.background.default" /> | color.choice.background.default | `{color.surface-container.subtle}` | — |
+    | <ColorChip color="#00A724" darkColor="#028D1D" token="color.choice.background.selected" /> | color.choice.background.selected | `{color.accent-container.primary.medium}` | — |
+    | <ColorChip color="#F43828" darkColor="#BE1E12" token="color.choice.background.error" /> | color.choice.background.error | `{color.feedback-container.assertive.medium}` | — |
+    | <ColorChip color="#010B173F" darkColor="#FFFFFF52" token="color.choice.border.default" /> | color.choice.border.default | `{color.border.medium}` | — |
+    | <ColorChip color="#0109108F" darkColor="#FFFFFF7A" token="color.choice.border.hover" /> | color.choice.border.hover | `{color.border.bold}` | — |
+    | <ColorChip color="#00A724" darkColor="#82DB82" token="color.choice.border.selected" /> | color.choice.border.selected | `{color.accent-border.primary.medium}` | — |
+    | <ColorChip color="#F43828" darkColor="#FFA99A" token="color.choice.border.error" /> | color.choice.border.error | `{color.feedback-border.assertive.bold}` | — |
+    | <ColorChip color="#FFFFFF" token="color.choice.mark.default" /> | color.choice.mark.default | `{color.on-accent.default}` | — |
 
     ### Table
 
-    | トークン                                  | 参照先（LM）                                        |
-    | ------------------------------------- | ---------------------------------------------- |
-    | color.table.td.background.hover       | `{color.surface-container.whisper}`            |
-    | color.table.th.background.alternative | `{color.surface-container.whisper}`            |
-    | color.table.td.background.error       | `{color.feedback-container.assertive.ghost}`   |
-    | color.table.td.background.error.hover | `{color.feedback-container.assertive.whisper}` |
-    | color.table.border                    | `{color.border.subtle}`                        |
+    | カラー | トークン | 参照先（LM） | Figma Variables コメント |
+    | --- | --- | --- | --- |
+    | <ColorChip color="#00375807" darkColor="#FFFFFF12" token="color.table.td.background.hover" /> | color.table.td.background.hover | `{color.surface-container.whisper}` | — |
+    | <ColorChip color="#00375807" darkColor="#FFFFFF12" token="color.table.th.background.alternative" /> | color.table.th.background.alternative | `{color.surface-container.whisper}` | — |
+    | <ColorChip color="#FEF7F6" darkColor="#400000" token="color.table.td.background.error" /> | color.table.td.background.error | `{color.feedback-container.assertive.ghost}` | — |
+    | <ColorChip color="#FFF0EF" darkColor="#5A0703" token="color.table.td.background.error.hover" /> | color.table.td.background.error.hover | `{color.feedback-container.assertive.whisper}` | — |
+    | <ColorChip color="#001A3D1C" darkColor="#FFFFFF29" token="color.table.border" /> | color.table.border | `{color.border.subtle}` | — |
   </Tab>
 </Tabs>

@@ -35,6 +35,19 @@
   inset: 0;
 }
 
+/* Light/Dark mode chip switching */
+.color-chip--dark {
+  display: none;
+}
+
+.dark .color-chip--light {
+  display: none;
+}
+
+.dark .color-chip--dark {
+  display: block;
+}
+
 .color-chip-copied {
   outline: 2px solid #00a724;
   outline-offset: 1px;
@@ -67,4 +80,10 @@
 
 .dark .color-chip-wrapper:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* カラーチップ列の幅を内包物に合わせる */
+td:has(> .color-chip-wrapper) {
+  width: 1%;
+  white-space: nowrap;
 }
