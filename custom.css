@@ -81,3 +81,8 @@
 .dark .color-chip-wrapper:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
+
+/* Card title color — primary */
+.card-group .card h2.not-prose {
+  color: #00a724;
+}
