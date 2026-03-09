@@ -111,6 +111,7 @@ Figmaトークンの参照先を表す `{color.neutral-alpha.5}` のような表
 ## ガイドライン執筆ルール
 
 ### 文書構造テンプレート
+コンテンツの先頭に該当figmaファイルのURLをコメントアウトで記しておく
 
 #### Foundation ガイドライン（Colors, Typography 等）
 ```
