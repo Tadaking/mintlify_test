@@ -68,12 +68,25 @@ get_design_context(_guidelines の nodeId)
 ```
 
 ### Step 4: スクリーンショットの取得
+
+Figma Console MCP を使用する（読み取り専用のリモートMCPではない）。
 ```
 get_screenshot(nodeId)
 ```
 
 - `images/{component-name}-overview-light.png` として保存する
-- ファイル内に `<!-- figma-frame: FILE_KEY/NODE_ID | バリアント一覧 -->` を記録する
+- MDXファイル内に `<!-- figma-frame: FILE_KEY/NODE_ID | バリアント一覧 -->` を記録する
+
+### Step 5: Anatomy フレームの生成
+
+`skills/generate-anatomy.md` をサブスキルとして呼び出す。
+
+- Figma Console MCP の書き込み機能を使って対象コンポーネントの隣にAnatomyフレームを生成する
+- 生成後に `get_screenshot` で書き出し、`images/{component-name}-anatomy-light.png` として保存する
+- MDXファイル内に `<!-- figma-frame: FILE_KEY/NODE_ID | Anatomy -->` を記録する
+
+> **注:** `skills/generate-anatomy.md` が未作成の場合はこのステップをスキップし、
+> `<!-- TODO: generate-anatomy スキル作成後に実行 -->` をMDXに挿入して続行する。
 
 ---
 
