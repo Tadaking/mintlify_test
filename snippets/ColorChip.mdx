@@ -1,0 +1,19 @@
+export const ColorChip = ({ color, darkColor, token }) => {
+  const [copied, setCopied] = useState(false);
+  const dark = darkColor || color;
+  return (
+    <span
+      className={`color-chip-wrapper${copied ? ' color-chip-copied' : ''}`}
+      onClick={() => {
+        navigator.clipboard.writeText(token);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }}
+      title={token}
+    >
+      <span className="color-chip color-chip--light" style={{ backgroundColor: color }} />
+      <span className="color-chip color-chip--dark" style={{ backgroundColor: dark }} />
+      {copied && <span className="color-chip-check">✓</span>}
+    </span>
+  );
+};
