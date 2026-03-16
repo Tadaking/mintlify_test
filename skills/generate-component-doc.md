@@ -88,6 +88,17 @@ get_screenshot(nodeId)
 > **注:** `skills/generate-anatomy.md` が未作成の場合はこのステップをスキップし、
 > `<!-- TODO: generate-anatomy スキル作成後に実行 -->` をMDXに挿入して続行する。
 
+### Step 6: バリアントビジュアルの生成
+
+`skills/generate-variants-visual.md` をサブスキルとして呼び出す。
+
+- Figma Console MCP の書き込み機能を使って Size・State・Shape フレームを生成する
+- 生成後に各フレームのスクリーンショットを取得し `images/` に保存する
+- MDXの `## バリアント` セクションに挿入する
+
+> **注:** `skills/generate-variants-visual.md` が未作成の場合はこのステップをスキップし、
+> `<!-- TODO: generate-variants-visual スキル作成後に実行 -->` をMDXに挿入して続行する。
+
 ---
 
 ## セクションマッピング
