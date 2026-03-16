@@ -44,22 +44,52 @@ get_variable_defs(nodeId)
 
 ### Step 3: `_guidelines` フレームの探索
 
-コンポーネントの直下に `_guidelines` という名前のフレームを探す。
+コンポーネントと同じページ内で `_guidelines` という名前のフレームを探す。
 
 **見つかった場合：**
 ```
 get_design_context(_guidelines の nodeId)
 ```
-テキストレイヤー名で以下のセクションに振り分ける：
 
-| レイヤー名 | 使用先 |
+以下のレイヤー構造に従って各セクションに振り分ける：
+
+| レイヤーパス | 使用先 |
 |---|---|
-| `overview` | 概要セクション |
-| `when-to-use` | バリアントの「いつ使う」 |
-| `when-not-to-use` | バリアントの「いつ使わない」 |
-| `do` | illustration-needed コメントの説明 |
-| `dont` | illustration-needed コメントの説明 |
-| `related` | 類似要素との使い分けセクション |
+| `overview` | `## 概要` セクション |
+| `related` | `## 類似要素との使い分け` セクション |
+| `variants/{name}/when-to-use` | 該当バリアントの「✅ いつ使う」 |
+| `variants/{name}/when-not-to-use` | 該当バリアントの「❌ いつ使わない」 |
+| `combinations/do-{n}/caption` | 組み合わせパターンのDoキャプション |
+| `combinations/dont-{n}/caption` | 組み合わせパターンのDon'tキャプション |
+| `combinations/caution-{n}/caption` | 組み合わせパターンのCautionキャプション |
+
+`combinations` の `frame` レイヤーはスクリーンショットを取得して `images/{component-name}-combination-{do|dont|caution}-{n}-light.png` として保存する。
+
+MDXの `## 組み合わせパターン` セクションは `do-dont-grid` クラスを使い、以下の形式で生成する：
+```md
+<div class="do-dont-grid">
+  <div class="do-card">
+    ![](/images/{component-name}-combination-do-1-light.png)
+    <div class="do-dont-label">✅ Do</div>
+    <div class="do-dont-caption">{caption テキスト}</div>
+  </div>
+  <div class="dont-card">
+    ![](/images/{component-name}-combination-dont-1-light.png)
+    <div class="do-dont-label">❌ Don't</div>
+    <div class="do-dont-caption">{caption テキスト}</div>
+  </div>
+</div>
+
+<div class="do-dont-grid">
+  <div class="caution-card">
+    ![](/images/{component-name}-combination-caution-1-light.png)
+    <div class="do-dont-label">⚠️ Caution</div>
+    <div class="do-dont-caption">{caption テキスト}</div>
+  </div>
+</div>
+```
+
+do / dont / caution の数は `_guidelines` フレームの実際の連番に応じて動的に生成する。
 
 **見つからなかった場合：**
 該当セクションを以下のTODOコメントに置き換えて続行する：

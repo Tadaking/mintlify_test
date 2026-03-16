@@ -188,3 +188,40 @@
 .dark .dont-card .do-dont-caption {
   background: rgba(239, 68, 68, 0.1);
 }
+
+/* Caution card */
+.caution-card {
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #d97706;
+}
+
+.caution-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caution-card .do-dont-label {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.caution-card .do-dont-caption {
+  background: #fffbeb;
+}
+
+.dark .caution-card {
+  border-color: #f59e0b;
+}
+
+.dark .caution-card .do-dont-label {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fcd34d;
+}
+
+.dark .caution-card .do-dont-caption {
+  background: rgba(245, 158, 11, 0.1);
+}
