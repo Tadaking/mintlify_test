@@ -166,16 +166,42 @@ for (const { variantValue, intentValue } of combinations) {
     }
 
     // ラベルプロパティにステート名を反映（#nodeId サフィックス対応）
+    // ただしテキストが非表示になるステート（isPending等）では書き換えない
     const textProps = Object.keys(instance.componentProperties)
       .filter(key => /^(label|text)(#|$)/i.test(key));
-    if (textProps.length > 0) {
+
+    const shouldSkipLabelRewrite = props.isPending === true;
+
+    if (textProps.length > 0 && !shouldSkipLabelRewrite) {
       instance.setProperties({ [textProps[0]]: label });
     }
 
     // clipsContentをオフ
     if ('clipsContent' in instance) instance.clipsContent = false;
 
-    rowFrame.appendChild(instance);
+    if (shouldSkipLabelRewrite) {
+      // テキストが非表示になるステートはラベルをインスタンスの下に追加する
+      const stateLabel = figma.createText();
+      await figma.loadFontAsync({ family: 'Inter', style: 'Regular' });
+      stateLabel.characters = label;
+      stateLabel.fontSize = 11;
+      stateLabel.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.5 } }];
+      stateLabel.textAlignHorizontal = 'CENTER';
+
+      const wrapper = figma.createFrame();
+      wrapper.layoutMode = 'VERTICAL';
+      wrapper.itemSpacing = 6;
+      wrapper.fills = [];
+      wrapper.clipsContent = false;
+      wrapper.primaryAxisSizingMode = 'AUTO';
+      wrapper.counterAxisSizingMode = 'AUTO';
+      wrapper.appendChild(instance);
+      wrapper.appendChild(stateLabel);
+      rowFrame.appendChild(wrapper);
+    } else {
+      // 通常はインスタンスをそのまま追加（ボタン内テキストがステート名になっている）
+      rowFrame.appendChild(instance);
+    }
   }
 
   outerFrame.appendChild(rowFrame);
