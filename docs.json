@@ -27,6 +27,12 @@
             ]
           },
           {
+            "group": "Components",
+            "pages": [
+              "components/button"
+            ]
+          },
+          {
             "group": "AI tools",
             "pages": [
               "ai-tools/cursor",

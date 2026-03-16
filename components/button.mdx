@@ -1,0 +1,256 @@
+---
+title: "Button"
+description: "ユーザーのアクションを実行するためのインタラクティブな要素"
+---
+
+{/* _guidelines フレーム未作成：追加後に再実行 */}
+{/* figma: https://www.figma.com/design/Pvlx7A6oDLlnPF8MQYFDcq/Web-Components?node-id=4148-4978 */}
+
+<Tabs>
+<Tab title="Overview">
+
+## 概要
+
+{/* TODO: component description がないため構造から推測。_guidelines フレーム追加後に更新 */}
+
+Button は、ユーザーがアクションを実行するためのコンポーネント。フォームの送信、ダイアログの確認、操作のトリガーなど、明確なアクションを促す場面で使用する。
+
+## 類似要素との使い分け
+
+{/* TODO: _guidelines フレームを追加後に更新 */}
+
+| 判断基準 | 使用する要素 |
+|---|---|
+| アクションを実行する（保存、削除、送信など） | Button |
+| 別のページ・URLに移動する | Link |
+| 選択肢のオン/オフを切り替える | Toggle / Checkbox |
+
+## Anatomy
+
+{/* figma-frame: Pvlx7A6oDLlnPF8MQYFDcq/5063-17750 | Anatomy */}
+
+![Button Anatomy](/images/button-anatomy-light.png)
+
+| # | Type | Element name | Notes |
+|---|---|---|---|
+| 1 | Structural | Background | Background fill with corner radius — always present |
+| 2 | Sub-component | Left Icon | Icon sub-component — hidden by default, shown via `hasLeftIcon` toggle |
+| 3 | Text | Label | "ラベル" — primary label text |
+| 4 | Sub-component | Right Icon | Icon sub-component — hidden by default, shown via `hasRightIcon` toggle |
+
+## バリアント
+
+### variant
+
+#### Primary
+
+画面内で最も重要なアクションに使う。視覚的に最も目立つバリアント。
+
+✅ いつ使う
+- フォームの送信ボタン（「変更を保存」「アカウントを作成」）
+- ダイアログの確定アクション
+- ページ内で1つだけの主要アクション
+
+❌ いつ使わない
+- 同じ画面に複数の Primary を並べない
+- 補助的・二次的なアクション（Secondary や Ghost を使う）
+
+{/* illustration-needed: Do/Don't（_guidelines 追加後に更新） */}
+
+#### Secondary
+
+Primary に次ぐ重要度のアクション。ボーダーによって存在感を保ちつつ、Primary を引き立てる。
+
+✅ いつ使う
+- Primary と並べる補助アクション（「キャンセル」「戻る」）
+- 単独で使う中程度の重要度のアクション
+
+❌ いつ使わない
+- 画面の主要アクション（Primary を使う）
+- 目立たせたくない補助操作（Ghost を使う）
+
+#### Neutral
+
+控えめな見た目で、コンテンツを邪魔しないアクション。背景とボーダーで最低限の存在感を示す。
+
+✅ いつ使う
+- ツールバーやカード内の操作ボタン
+- 一覧画面の各行に付くアクション
+
+❌ いつ使わない
+- ユーザーに積極的に押してほしいアクション（Primary / Secondary を使う）
+
+#### Ghost
+
+背景を持たず、テキストとアイコンだけで構成される最も控えめなバリアント。
+
+✅ いつ使う
+- ナビゲーション内の操作
+- 密集したUI内で視覚的なノイズを減らしたい場面
+- 「もっと見る」「閉じる」などの補助的な操作
+
+❌ いつ使わない
+- ユーザーが見落としてはいけない重要なアクション
+
+### intent
+
+#### Neutral
+
+デフォルトの意図。一般的なアクションに使う。
+
+#### Danger
+
+削除や取り消しなど、破壊的・不可逆なアクションに使う。variant が Primary の場合は赤い背景、Secondary の場合は赤いテキストとボーダーになる。
+
+### size
+
+| サイズ | 用途 |
+|---|---|
+| xl（56px） | ランディングページやヒーローセクションなど、大きく目立たせたい場面 |
+| lg（48px） | フォームの送信ボタンなど、標準的な主要アクション |
+| md（36px） | カード内やツールバーなど、標準的なUI |
+| sm（32px） | テーブルの行内アクションなど、省スペースが求められる場面 |
+
+{/* figma-frame: Pvlx7A6oDLlnPF8MQYFDcq/4148-4978 | サイズ比較 */}
+
+### その他のプロパティ
+
+| プロパティ | 説明 |
+|---|---|
+| full-radius | `true` にすると角丸が最大になり、ピル型のボタンになる |
+| hasLeftIcon / hasRightIcon | アイコンの表示・非表示を切り替える |
+| isPending | 処理中状態。ローディングインジケーターを表示する |
+
+## 組み合わせパターン
+
+{/* illustration-needed: Do/Don't（_guidelines 追加後に更新） */}
+
+### 推奨される組み合わせ
+
+- **Primary + Secondary**: 主要アクションと補助アクションの基本パターン
+- **Primary + Ghost**: 主要アクションと「キャンセル」のようなシンプルな組み合わせ
+- **Secondary + Ghost**: Primary がページ内の別の場所にある場合
+
+### 避けるべき組み合わせ
+
+- **Primary + Primary**: 視覚的な優先順位が崩れる
+- **同じバリアントを3つ以上並べる**: 選択肢が多い場合はドロップダウンやメニューを検討する
+
+### 3つ以上のアクションが並ぶ場合
+
+最も重要なアクションを Primary、次を Secondary、それ以外を Ghost にする。4つ以上になる場合は「その他」メニューへの集約を検討する。
+
+## ラベル・コンテンツの書き方
+
+- **動詞＋名詞**の形式で書く：「保存」→「変更を保存」、「削除」→「アカウントを削除」
+- アクションの結果が明確に伝わる表現を使う
+- 「クリック」「こちら」「押す」などの曖昧な表現は避ける
+- Danger intent の場合は「削除する」「取り消す」など、破壊的であることが伝わる表現を使う
+- ラベルは短く。目安として日本語で8文字以内、英語で3単語以内
+
+## アクセシビリティ
+
+### キーボード操作
+
+| キー | 動作 |
+|---|---|
+| `Tab` | ボタンにフォーカスを移動する |
+| `Enter` / `Space` | ボタンのアクションを実行する |
+
+### スクリーンリーダー
+
+| 属性 | 値 | 説明 |
+|---|---|---|
+| `role` | `button` | ネイティブ `<button>` 要素を使えば自動付与 |
+| `aria-label` | — | アイコンのみのボタンに必須。ラベルが見えている場合は不要 |
+| `aria-disabled` | `true` | disabled 状態で付与。`disabled` 属性と併用する |
+| `aria-busy` | `true` | isPending 状態で付与 |
+
+### コントラスト（APCA基準）
+
+| バリアント | 組み合わせ | 基準 |
+|---|---|---|
+| Primary | `color/button/primary/text` on `color/button/primary/background/default` | Lc 60以上 |
+| Secondary | `color/button/secondary/text` on `color/button/secondary/background/default` | Lc 60以上 |
+| Neutral | `color/button/neutral/text/default` on `color/button/neutral/background/default` | Lc 60以上 |
+| Ghost | `color/button/neutral/text/default` on 親要素の背景色 | Lc 60以上 |
+
+</Tab>
+
+<Tab title="Web">
+
+## カラートークン
+
+### Neutral intent
+
+#### Background
+
+| バリアント | Default | Hover | Pressed | Disabled |
+|---|---|---|---|---|
+| Primary | `color/button/primary/background/default` | `color/button/primary/background/hover` | `color/button/primary/background/pressed` | opacity: 0.4 |
+| Secondary | `color/button/secondary/background/default` | `color/button/secondary/background/hover` | `color/button/secondary/background/pressed` | opacity: 0.4 |
+| Neutral | `color/button/neutral/background/default` | `color/button/neutral/background/hover` | `color/button/neutral/background/pressed` | opacity: 0.4 |
+| Ghost | `color/button/ghost/background/default` | `color/button/ghost/background/hover` | `color/button/ghost/background/pressed` | opacity: 0.4 |
+
+#### Text / Icon
+
+| バリアント | Default | Hover | Pressed | Disabled |
+|---|---|---|---|---|
+| Primary | `color/button/primary/text` | `color/button/primary/text` | `color/button/primary/text` | opacity: 0.4 |
+| Secondary | `color/button/secondary/text` | `color/button/secondary/text` | `color/button/secondary/text` | opacity: 0.4 |
+| Neutral | `color/button/neutral/text/default` | `color/button/neutral/text/default` | `color/button/neutral/text/default` | opacity: 0.4 |
+| Ghost | `color/button/neutral/text/default` | `color/button/ghost/text` | `color/button/ghost/text` | opacity: 0.4 |
+
+### Danger intent
+
+#### Background
+
+| バリアント | Default | Hover | Pressed | Disabled |
+|---|---|---|---|---|
+| Primary | `color/button/primary/background/destractive/default` | `color/button/primary/background/destractive/hover` | `color/button/primary/background/destractive/pressed` | opacity: 0.4 |
+| Secondary | `color/button/secondary/background/destractive/default` | `color/button/secondary/background/destractive/hover` | `color/button/secondary/background/destractive/pressed` | opacity: 0.4 |
+
+#### Text / Icon（Danger）
+
+| バリアント | Default | Hover | Pressed | Disabled |
+|---|---|---|---|---|
+| Primary | `color/button/primary/text` | `color/button/primary/text` | `color/button/primary/text` | opacity: 0.4 |
+| Secondary | `color/button/secondary/text/destractive` | `color/button/secondary/text/destractive` | `color/button/secondary/text/destractive` | opacity: 0.4 |
+
+### Border
+
+全バリアント共通：`size/button/border-width`（0.5px）
+
+## サイズ・スペーシング
+
+| トークン | xl | lg | md | sm |
+|---|---|---|---|---|
+| 高さ | `Size/Control/xl/size`（56px） | `Size/Control/lg/size`（48px） | `Size/Control/md/size`（36px） | `Size/Control/sm/size`（32px） |
+| 最小幅 | `Size/Control/xl/min-width`（132px） | `Size/Control/lg/min-width`（96px） | `Size/Control/md/min-width`（96px） | `Size/Control/sm/min-width`（84px） |
+| 角丸 | `Size/Control/xl/corner-radius`（14px） | `Size/Control/lg/corner-radius`（10px） | `Size/Control/md/corner-radius`（6px） | `Size/Control/xs/corner-radius`（6px） |
+| 左右パディング | `Size/Control/xl/inline-padding/normal`（16px） | `Size/Control/lg/inline-padding/normal`（16px） | `Size/Control/md/inline-padding/normal`（12px） | `Size/Control/sm/inline-padding/normal`（8px） |
+| アイコン・ラベル間ギャップ | `Size/Control/xl/inline-gap`（4px） | `Size/Control/lg/inline-gap`（4px） | `Size/Control/md/inline-gap`（2px） | `Size/Control/sm/inline-gap`（2px） |
+| ボーダー幅 | `size/button/border-width`（0.5px） | `size/button/border-width`（0.5px） | `size/button/border-width`（0.5px） | `size/button/border-width`（0.5px） |
+
+### タイポグラフィ
+
+| サイズ | トークン | 値 |
+|---|---|---|
+| xl | `Typography/label/size/lg` | 22px / line-height 24px / weight 500 |
+| lg | `Typography/label/size/md` | 16px / line-height 24px / weight 500 |
+| md | `Typography/label/size/md` | 16px / line-height 24px / weight 500 |
+| sm | `Typography/label/size/sm` | 14px / line-height 20px / weight 500 |
+
+## インタラクションステート
+
+| ステート | 挙動 |
+|---|---|
+| Default | 静止状態 |
+| Hover | 背景色が1段階濃くなる（ライトモード）/ 明るくなる（ダークモード） |
+| Pressed | 背景色がさらに1段階濃くなる |
+| Focused | フォーカスリングが表示される。背景色は Default のまま |
+| Disabled | カラートークンは変更せず、`opacity: 0.4` を一律適用。クリック不可 |
+| Pending | Disabled と同じ見た目 + ローディングインジケーターを表示 |
+
+</Tab>
+</Tabs>
