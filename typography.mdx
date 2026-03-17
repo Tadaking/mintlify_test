@@ -7,6 +7,35 @@ description: "適切なスケール、スタイル、ウェイトを用いて慎
 
 {/* figma: https://www.figma.com/design/PSqBlA9pU7SHYbplxhS8q6/Foundation?node-id=2712-151 */}
 
+export const BodyPreview = ({ name, size, sizeRem, lineHeights }) => {
+  const [mode, setMode] = React.useState('standard');
+  const lh = lineHeights[mode];
+  const lhLabels = { comfortable: 'Comfortable', standard: 'Standard', compact: 'Compact' };
+  const jpText = 'ある日の暮方の事である。一人の下人が、羅生門の下で雨やみを待っていた。広い門の下には、この男のほかに誰もいない。ただ、所々丹塗の剥げた、大きな円柱に、蟋蟀が一匹とまっている。羅生門が、朱雀大路にある以上は、この男のほかにも、雨やみをする市女笠や揉烏帽子が、もう二三人はありそうなものである。';
+  const enText = 'It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.';
+  return (
+    <div className="type-preview type-preview--wrap">
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px'}}>
+        <div className="type-preview-name" style={{marginBottom: 0}}>{name}</div>
+        <select
+          value={mode}
+          onChange={(e) => setMode(e.target.value)}
+          className="type-preview-select"
+        >
+          {Object.entries(lineHeights).map(([key, val]) => (
+            <option key={key} value={key}>{lhLabels[key]}（行間 {val}px）</option>
+          ))}
+        </select>
+      </div>
+      <div className="type-preview-sample-jp" style={{fontSize: `${size}px`, fontWeight: 400, lineHeight: `${lh}px`}}>{jpText}</div>
+      <div className="type-preview-font">Noto Sans JP</div>
+      <div className="type-preview-sample-en" style={{fontSize: `${size}px`, fontWeight: 400, lineHeight: `${lh}px`}}>{enText}</div>
+      <div className="type-preview-font">Inter</div>
+      <div className="type-preview-specs">サイズ: {size}px / {sizeRem}　ウェイト: Regular (400)　行間: {lh}px</div>
+    </div>
+  );
+};
+
 <Tabs>
   <Tab title="Overview">
     タイポグラフィは、文字を通じて情報に構造と意味を与える行為です。色やレイアウトが印象を形作る一方で、もっとも直接的に「言葉」を届け、ユーザーが情報を認識し、判断し、行動するまでの時間に影響します。
@@ -204,75 +233,176 @@ description: "適切なスケール、スタイル、ウェイトを用いて慎
 
     ## Big Title
 
-    | 言語 | フォント         | ウェイト         | サイズ              | 行間             | 字間  |
-    | --- | ------------ | ------------ | ---------------- | -------------- | --- |
-    | jp | Noto Sans JP | Medium (500) | 102px / 6.375rem | 120px / 7.5rem | 0px |
-    | en | Inter        | Medium (500) | 102px / 6.375rem | 120px / 7.5rem | 0px |
+    <div class="type-preview">
+      <div class="type-preview-name">Big Title</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '102px', fontWeight: 500, lineHeight: '120px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '102px', fontWeight: 500, lineHeight: '120px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 102px / 6.375rem　ウェイト: Medium (500)　行間: 120px / 7.5rem</div>
+    </div>
 
     ## Display
 
-    | バリアント | 言語 | フォント         | ウェイト          | サイズ             | 行間             | 字間  |
-    | ----- | --- | ------------ | ------------- | --------------- | -------------- | --- |
-    | lg    | jp | Noto Sans JP | Regular (400) | 64px / 4rem     | 76px / 4.75rem | 0px |
-    | lg    | en | Inter        | Regular (400) | 64px / 4rem     | 76px / 4.75rem | 0px |
-    | md    | jp | Noto Sans JP | Medium (500)  | 42px / 2.625rem | 52px / 3.25rem | 0px |
-    | md    | en | Inter        | Medium (500)  | 42px / 2.625rem | 52px / 3.25rem | 0px |
-    | sm    | jp | Noto Sans JP | Medium (500)  | 32px / 2rem     | 40px / 2.5rem  | 0px |
-    | sm    | en | Inter        | Medium (500)  | 32px / 2rem     | 40px / 2.5rem  | 0px |
-    | xs    | jp | Noto Sans JP | Medium (500)  | 26px / 1.625rem | 36px / 2.25rem | 0px |
-    | xs    | en | Inter        | Medium (500)  | 26px / 1.625rem | 36px / 2.25rem | 0px |
+    <div class="type-preview">
+      <div class="type-preview-name">display-lg</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '64px', fontWeight: 400, lineHeight: '76px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '64px', fontWeight: 400, lineHeight: '76px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 64px / 4rem　ウェイト: Regular (400)　行間: 76px / 4.75rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">display-md</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '42px', fontWeight: 500, lineHeight: '52px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '42px', fontWeight: 500, lineHeight: '52px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 42px / 2.625rem　ウェイト: Medium (500)　行間: 52px / 3.25rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">display-sm</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '32px', fontWeight: 500, lineHeight: '40px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '32px', fontWeight: 500, lineHeight: '40px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 32px / 2rem　ウェイト: Medium (500)　行間: 40px / 2.5rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">display-xs</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '26px', fontWeight: 500, lineHeight: '36px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '26px', fontWeight: 500, lineHeight: '36px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 26px / 1.625rem　ウェイト: Medium (500)　行間: 36px / 2.25rem</div>
+    </div>
 
     ## Title
 
-    | バリアント | 言語 | フォント         | ウェイト            | サイズ             | 行間             | 字間  |
-    | ----- | --- | ------------ | --------------- | --------------- | -------------- | --- |
-    | xl    | jp | Noto Sans JP | Semi Bold (600) | 32px / 2rem     | 40px / 2.5rem  | 0px |
-    | xl    | en | Inter        | Semi Bold (600) | 32px / 2rem     | 40px / 2.5rem  | 0px |
-    | lg    | jp | Noto Sans JP | Semi Bold (600) | 26px / 1.625rem | 36px / 2.25rem | 0px |
-    | lg    | en | Inter        | Semi Bold (600) | 26px / 1.625rem | 36px / 2.25rem | 0px |
-    | md    | jp | Noto Sans JP | Semi Bold (600) | 22px / 1.375rem | 28px / 1.75rem | 0px |
-    | md    | en | Inter        | Semi Bold (600) | 22px / 1.375rem | 28px / 1.75rem | 0px |
-    | sm    | jp | Noto Sans JP | Semi Bold (600) | 18px / 1.125rem | 24px / 1.5rem  | 0px |
-    | sm    | en | Inter        | Semi Bold (600) | 18px / 1.125rem | 24px / 1.5rem  | 0px |
-    | xs    | jp | Noto Sans JP | Semi Bold (600) | 16px / 1rem     | 24px / 1.5rem  | 0px |
-    | xs    | en | Inter        | Semi Bold (600) | 16px / 1rem     | 24px / 1.5rem  | 0px |
-    | 2xs   | jp | Noto Sans JP | Semi Bold (600) | 14px / 0.875rem | 20px / 1.25rem | 0px |
-    | 2xs   | en | Inter        | Semi Bold (600) | 14px / 0.875rem | 20px / 1.25rem | 0px |
+    <div class="type-preview">
+      <div class="type-preview-name">title-xl</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '32px', fontWeight: 600, lineHeight: '40px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '32px', fontWeight: 600, lineHeight: '40px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 32px / 2rem　ウェイト: Semi Bold (600)　行間: 40px / 2.5rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">title-lg</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '26px', fontWeight: 600, lineHeight: '36px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '26px', fontWeight: 600, lineHeight: '36px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 26px / 1.625rem　ウェイト: Semi Bold (600)　行間: 36px / 2.25rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">title-md</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '22px', fontWeight: 600, lineHeight: '28px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '22px', fontWeight: 600, lineHeight: '28px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 22px / 1.375rem　ウェイト: Semi Bold (600)　行間: 28px / 1.75rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">title-sm</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '18px', fontWeight: 600, lineHeight: '24px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '18px', fontWeight: 600, lineHeight: '24px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 18px / 1.125rem　ウェイト: Semi Bold (600)　行間: 24px / 1.5rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">title-xs</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '16px', fontWeight: 600, lineHeight: '24px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '16px', fontWeight: 600, lineHeight: '24px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 16px / 1rem　ウェイト: Semi Bold (600)　行間: 24px / 1.5rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">title-2xs</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '14px', fontWeight: 600, lineHeight: '20px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '14px', fontWeight: 600, lineHeight: '20px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 14px / 0.875rem　ウェイト: Semi Bold (600)　行間: 20px / 1.25rem</div>
+    </div>
 
     ## Body
 
-    行間は Comfortable（ゆるめ）、Compact（狭め）のバリエーションがあり、3種類から選べます。
+    行間は Comfortable（ゆるめ）、Standard（標準）、Compact（狭め）の3種類から選べます。プルダウンで切り替えて行間の違いを確認できます。
 
-    | バリアント | 言語 | フォント         | ウェイト          | サイズ             | 行間             | 字間  |
-    | ----- | --- | ------------ | ------------- | --------------- | -------------- | --- |
-    | lg    | jp | Noto Sans JP | Regular (400) | 18px / 1.125rem | 28px / 1.75rem | 0px |
-    | lg    | en | Inter        | Regular (400) | 18px / 1.125rem | 28px / 1.75rem | 0px |
-    | md    | jp | Noto Sans JP | Regular (400) | 16px / 1rem     | 24px / 1.5rem  | 0px |
-    | md    | en | Inter        | Regular (400) | 16px / 1rem     | 24px / 1.5rem  | 0px |
-    | sm    | jp | Noto Sans JP | Regular (400) | 14px / 0.875rem | 20px / 1.25rem | 0px |
-    | sm    | en | Inter        | Regular (400) | 14px / 0.875rem | 20px / 1.25rem | 0px |
+    <BodyPreview name="body-lg" size={18} sizeRem="1.125rem" lineHeights={{comfortable: 32, standard: 28, compact: 24}} />
+
+    <BodyPreview name="body-md" size={16} sizeRem="1rem" lineHeights={{comfortable: 28, standard: 24, compact: 20}} />
+
+    <BodyPreview name="body-sm" size={14} sizeRem="0.875rem" lineHeights={{comfortable: 24, standard: 20, compact: 16}} />
 
     ## Label
 
-    | バリアント | 言語 | フォント         | ウェイト         | サイズ              | 行間             | 字間  |
-    | ----- | --- | ------------ | ------------ | ---------------- | -------------- | --- |
-    | lg    | jp | Noto Sans JP | Medium (500) | 18px / 1.125rem  | 28px / 1.75rem | 0px |
-    | lg    | en | Inter        | Medium (500) | 18px / 1.125rem  | 28px / 1.75rem | 0px |
-    | md    | jp | Noto Sans JP | Medium (500) | 16px / 1rem      | 24px / 1.5rem  | 0px |
-    | md    | en | Inter        | Medium (500) | 16px / 1rem      | 24px / 1.5rem  | 0px |
-    | sm    | jp | Noto Sans JP | Medium (500) | 14px / 0.875rem  | 20px / 1.25rem | 0px |
-    | sm    | en | Inter        | Medium (500) | 14px / 0.875rem  | 20px / 1.25rem | 0px |
-    | xs    | jp | Noto Sans JP | Medium (500) | 13px / 0.8125rem | 16px / 1rem    | 0px |
-    | xs    | en | Inter        | Medium (500) | 13px / 0.8125rem | 16px / 1rem    | 0px |
+    <div class="type-preview">
+      <div class="type-preview-name">label-lg</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '18px', fontWeight: 500, lineHeight: '28px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '18px', fontWeight: 500, lineHeight: '28px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 18px / 1.125rem　ウェイト: Medium (500)　行間: 28px / 1.75rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">label-md</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '16px', fontWeight: 500, lineHeight: '24px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '16px', fontWeight: 500, lineHeight: '24px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 16px / 1rem　ウェイト: Medium (500)　行間: 24px / 1.5rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">label-sm</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '14px', fontWeight: 500, lineHeight: '20px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '14px', fontWeight: 500, lineHeight: '20px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 14px / 0.875rem　ウェイト: Medium (500)　行間: 20px / 1.25rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">label-xs</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '13px', fontWeight: 500, lineHeight: '16px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '13px', fontWeight: 500, lineHeight: '16px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 13px / 0.8125rem　ウェイト: Medium (500)　行間: 16px / 1rem</div>
+    </div>
 
     ## Caption
 
-    | バリアント | 言語 | フォント         | ウェイト          | サイズ              | 行間          | 字間  |
-    | ----- | --- | ------------ | ------------- | ---------------- | ----------- | --- |
-    | md    | jp | Noto Sans JP | Regular (400) | 12px / 0.75rem   | 16px / 1rem | 0px |
-    | md    | en | Inter        | Regular (400) | 12px / 0.75rem   | 16px / 1rem | 0px |
-    | sm    | jp | Noto Sans JP | Regular (400) | 11px / 0.6875rem | 16px / 1rem | 0px |
-    | sm    | en | Inter        | Regular (400) | 11px / 0.6875rem | 16px / 1rem | 0px |
+    <div class="type-preview">
+      <div class="type-preview-name">caption-md</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '12px', fontWeight: 400, lineHeight: '16px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '12px', fontWeight: 400, lineHeight: '16px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 12px / 0.75rem　ウェイト: Regular (400)　行間: 16px / 1rem</div>
+    </div>
+
+    <div class="type-preview">
+      <div class="type-preview-name">caption-sm</div>
+      <div class="type-preview-sample-jp" style={{fontSize: '11px', fontWeight: 400, lineHeight: '16px'}}>足の速い茶色のキツネがぐうたら犬を飛び越えて逃げます。</div>
+      <div class="type-preview-font">Noto Sans JP</div>
+      <div class="type-preview-sample-en" style={{fontSize: '11px', fontWeight: 400, lineHeight: '16px'}}>The quick brown fox jumps over the lazy dog and runs away.</div>
+      <div class="type-preview-font">Inter</div>
+      <div class="type-preview-specs">サイズ: 11px / 0.6875rem　ウェイト: Regular (400)　行間: 16px / 1rem</div>
+    </div>
   </Tab>
   <Tab title="Android">
     Google の Material Design 3 に準拠します。

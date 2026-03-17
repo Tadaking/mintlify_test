@@ -1,3 +1,113 @@
+/* Google Fonts — Typography previews */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+/* Typography preview block */
+.type-preview {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px 24px 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.dark .type-preview {
+  border-color: #374151;
+}
+
+.type-preview-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark .type-preview-name {
+  color: #9ca3af;
+}
+
+.type-preview-sample-jp,
+.type-preview-sample-en {
+  color: #111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.type-preview--wrap .type-preview-sample-jp,
+.type-preview--wrap .type-preview-sample-en {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.type-preview-select {
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+}
+
+.type-preview-select:focus {
+  border-color: #00a724;
+  box-shadow: 0 0 0 2px rgba(0, 167, 36, 0.15);
+}
+
+.dark .type-preview-select {
+  background: #1f2937;
+  border-color: #4b5563;
+  color: #e5e7eb;
+}
+
+.dark .type-preview-select:focus {
+  border-color: #028d1d;
+  box-shadow: 0 0 0 2px rgba(2, 141, 29, 0.2);
+}
+
+.dark .type-preview-sample-jp,
+.dark .type-preview-sample-en {
+  color: #f3f4f6;
+}
+
+.type-preview-sample-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.type-preview-sample-en {
+  font-family: 'Inter', sans-serif;
+}
+
+.type-preview-font {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark .type-preview-font {
+  color: #6b7280;
+}
+
+.type-preview-specs {
+  font-size: 11px;
+  color: #717579;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f3f4f6;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark .type-preview-specs {
+  color: #C0C3C6;
+  border-top-color: #1f2937;
+}
+
 /* Color Chip — Theme Token tables */
 .color-chip-wrapper {
   display: inline-block;
