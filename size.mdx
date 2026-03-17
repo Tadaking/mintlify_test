@@ -1,0 +1,239 @@
+---
+title: "Size"
+description: "サイズトークンはコンポーネントの寸法・余白・アイコンサイズを体系的に管理し、UI全体の一貫性を保ちます。"
+---
+
+{/* figma: https://www.figma.com/design/PSqBlA9pU7SHYbplxhS8q6/Foundation?node-id=3058-586 */}
+
+<Tabs>
+  <Tab title="Overview">
+    ## Quicklook
+
+    - トークンは「Primitive（Size コレクション）→ Semantic（Pattern コレクション）」の2層で管理しています
+    - Pattern コレクションは **Standard** と **Comfortable** の2つのモードを持ち、UIの密度を切り替えられます
+    - コンポーネントのサイズ・パディング・ギャップ・アイコンサイズはすべて Semantic トークンで制御します
+
+    ## トークンの階層
+
+    Garage のサイズトークンは2層構造で管理されています。Primitive 層で基礎となる数値スケールを定義し、Semantic 層でコンポーネントやレイアウトの文脈に応じた意味を与えます。
+
+    {/* figma-frame: PSqBlA9pU7SHYbplxhS8q6/3058-586 | Size 概要 */}
+
+    | 層 | コレクション | 役割 |
+    | --- | --- | --- |
+    | **Primitive** | Size | 2px〜280px の固定値スケール。すべてのサイズの基盤です。 |
+    | **Semantic** | Pattern | コンポーネントの高さ・パディング・ギャップなど、UIパターンに応じた意味を持つ層です。Standard / Comfortable の2モードで密度を切り替えます。 |
+
+    ## UI Pattern（モード）
+
+    Pattern コレクションは以下の2モードを持ちます。
+
+    | モード | 用途 |
+    | --- | --- |
+    | **Standard** | デスクトップ向けの標準密度。多くのプロダクトUIで使いましょう。 |
+    | **Comfortable** | タッチ操作が主体のUI。モバイルやタブレットに適しています。 |
+
+    ## コントロールサイズ一覧
+
+    各サイズにおけるコンポーネントの高さとアイコンサイズの対応です。
+
+    | サイズ | トークン | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | 2xs | `Size/Control/2xs/size` | 24px | 40px |
+    | xs | `Size/Control/xs/size` | 28px | 48px |
+    | sm | `Size/Control/sm/size` | 32px | 64px |
+    | md | `Size/Control/md/size` | 36px | 80px |
+    | lg | `Size/Control/lg/size` | 48px | 96px |
+    | xl | `Size/Control/xl/size` | 56px | 128px |
+
+    | サイズ | トークン | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | 2xs | `Size/Control/2xs/icon-size` | 16px | 24px |
+    | xs | `Size/Control/xs/icon-size` | 20px | 32px |
+    | sm | `Size/Control/sm/icon-size` | 20px | 32px |
+    | md | `Size/Control/md/icon-size` | 20px | 40px |
+    | lg | `Size/Control/lg/icon-size` | 24px | 48px |
+    | xl | `Size/Control/xl/icon-size` | 32px | 56px |
+  </Tab>
+
+  <Tab title="Primitive">
+    ## Size コレクション
+
+    すべてのサイズトークンの基盤となる固定値スケールです。コンポーネントの高さ、パディング、ギャップ、アイコンサイズなど、あらゆるサイズ指定の参照先として使われます。
+
+    | トークン | 値 |
+    | --- | --- |
+    | `size/2` | `2px` |
+    | `size/4` | `4px` |
+    | `size/6` | `6px` |
+    | `size/8` | `8px` |
+    | `size/10` | `10px` |
+    | `size/12` | `12px` |
+    | `size/16` | `16px` |
+    | `size/20` | `20px` |
+    | `size/24` | `24px` |
+    | `size/28` | `28px` |
+    | `size/32` | `32px` |
+    | `size/36` | `36px` |
+    | `size/40` | `40px` |
+    | `size/44` | `44px` |
+    | `size/48` | `48px` |
+    | `size/56` | `56px` |
+    | `size/64` | `64px` |
+    | `size/80` | `80px` |
+    | `size/96` | `96px` |
+    | `size/112` | `112px` |
+    | `size/128` | `128px` |
+    | `size/168` | `168px` |
+    | `size/200` | `200px` |
+    | `size/240` | `240px` |
+    | `size/280` | `280px` |
+  </Tab>
+
+  <Tab title="Semantic">
+    ## Spacing
+
+    レイアウトやコンポーネント間の余白を定義するトークンです。
+
+    ### Stacks（要素間ギャップ）
+
+    フォームフィールドやカードリストなど、縦方向に並ぶ要素間のギャップに使いましょう。
+
+    | トークン | 参照先 | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/spacing/stacks/compact` | `size/4` | 4px | 4px |
+    | `Size/spacing/stacks/condensed` | `size/8` | 8px | 8px |
+    | `Size/spacing/stacks/normal` | `size/16` | 16px | 16px |
+    | `Size/spacing/stacks/spacious` | `size/24` | 24px | 24px |
+
+    ### Padding（セクションパディング）
+
+    | トークン | 参照先 | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/spacing/padding/condensed` | `size/8` | 8px | 8px |
+    | `Size/spacing/padding/normal` | `size/16` | 16px | 16px |
+    | `Size/spacing/padding/spacious` | `size/24` | 24px | 24px |
+
+    ### Control Stack（コントロール間ギャップ）
+
+    | トークン | 参照先 | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/spacing/control-stack/condense` | `size/8` | 8px | 8px |
+    | `Size/spacing/control-stack/spacious` | `size/12` | 12px | 12px |
+
+    ### Layout Main（メインレイアウト間隔）
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/spacing/layout-main/condense` | `size/16` / `size/48` | 16px | 48px |
+    | `Size/spacing/layout-main/normal` | `size/24` / `size/64` | 24px | 64px |
+    | `Size/spacing/layout-main/spacious` | `size/32` / `size/96` | 32px | 96px |
+
+    ## Control
+
+    コンポーネント（ボタン、インプットなど）の寸法を定義するトークンです。
+
+    ### Size（コントロール高さ）
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/size` | `size/24` / `size/40` | 24px | 40px |
+    | `Size/Control/xs/size` | `size/28` / `size/48` | 28px | 48px |
+    | `Size/Control/sm/size` | `size/32` / `size/64` | 32px | 64px |
+    | `Size/Control/md/size` | `size/36` / `size/80` | 36px | 80px |
+    | `Size/Control/lg/size` | `size/48` / `size/96` | 48px | 96px |
+    | `Size/Control/xl/size` | `size/56` / `size/128` | 56px | 128px |
+
+    ### inline-padding（水平パディング）
+
+    Condensed / Normal / Spacious の3段階で水平方向の余白を制御します。
+
+    **Condensed**
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/inline-padding/condensed` | `size/4` / `size/8` | 4px | 8px |
+    | `Size/Control/xs/inline-padding/condensed` | `size/4` / `size/8` | 4px | 8px |
+    | `Size/Control/sm/inline-padding/condensed` | `size/6` / `size/16` | 6px | 16px |
+    | `Size/Control/md/inline-padding/condensed` | `size/8` / `size/16` | 8px | 16px |
+    | `Size/Control/lg/inline-padding/condensed` | `size/12` / `size/24` | 12px | 24px |
+    | `Size/Control/xl/inline-padding/condensed` | `size/12` / `size/24` | 12px | 24px |
+
+    **Normal**
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/inline-padding/normal` | `size/6` / `size/12` | 6px | 12px |
+    | `Size/Control/xs/inline-padding/normal` | `size/6` / `size/12` | 6px | 12px |
+    | `Size/Control/sm/inline-padding/normal` | `size/8` / `size/16` | 8px | 16px |
+    | `Size/Control/md/inline-padding/normal` | `size/12` / `size/24` | 12px | 24px |
+    | `Size/Control/lg/inline-padding/normal` | `size/16` / `size/32` | 16px | 32px |
+    | `Size/Control/xl/inline-padding/normal` | `size/16` / `size/32` | 16px | 32px |
+
+    **Spacious**
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/inline-padding/spacious` | `size/10` / `size/20` | 10px | 20px |
+    | `Size/Control/xs/inline-padding/specious` | `size/10` / `size/20` | 10px | 20px |
+    | `Size/Control/sm/inline-padding/spacious` | `size/12` / `size/24` | 12px | 24px |
+    | `Size/Control/md/inline-padding/spacious` | `size/16` / `size/32` | 16px | 32px |
+    | `Size/Control/lg/inline-padding/spacious` | `size/20` / `size/40` | 20px | 40px |
+    | `Size/Control/xl/inline-padding/spacious` | `size/20` / `size/40` | 20px | 40px |
+
+    ### padding-block（垂直パディング）
+
+    | トークン | 参照先 | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/padding-block` | `size/4` | 4px | 4px |
+    | `Size/Control/xs/padding-block` | `size/6` | 6px | 6px |
+    | `Size/Control/sm/padding-block` | `size/6` | 6px | 6px |
+    | `Size/Control/md/padding-block` | `size/6` | 6px | 6px |
+    | `Size/Control/lg/padding-block` | `size/16` | 16px | 16px |
+    | `Size/Control/xl/padding-block` | `size/12` | 12px | 12px |
+
+    ### inline-gap（アイコンとラベル間のギャップ）
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/inline-gap` | `size/2` | 2px | 2px |
+    | `Size/Control/xs/inline-gap` | `size/2` | 2px | 2px |
+    | `Size/Control/sm/inline-gap` | `size/2` | 2px | 2px |
+    | `Size/Control/md/inline-gap` | `size/2` / `size/4` | 2px | 4px |
+    | `Size/Control/lg/inline-gap` | `size/4` / `size/8` | 4px | 8px |
+    | `Size/Control/xl/inline-gap` | `size/4` / `size/8` | 4px | 8px |
+
+    ### icon-size
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/icon-size` | `size/16` / `size/24` | 16px | 24px |
+    | `Size/Control/xs/icon-size` | `size/20` / `size/32` | 20px | 32px |
+    | `Size/Control/sm/icon-size` | `size/20` / `size/32` | 20px | 32px |
+    | `Size/Control/md/icon-size` | `size/20` / `size/40` | 20px | 40px |
+    | `Size/Control/lg/icon-size` | `size/24` / `size/48` | 24px | 48px |
+    | `Size/Control/xl/icon-size` | `size/32` / `size/56` | 32px | 56px |
+
+    ### corner-radius
+
+    | トークン | 参照先（Std / Cmf） | Standard | Comfortable |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/corner-radius` | `border-radius/md` / `border-radius/lg` | 6px | 10px |
+    | `Size/Control/xs/corner-radius` | `border-radius/md` / `border-radius/xl` | 6px | 14px |
+    | `Size/Control/sm/corner-radius` | `border-radius/md` / `border-radius/2xl` | 6px | 18px |
+    | `Size/Control/md/corner-radius` | `border-radius/md` / `border-radius/2xl` | 6px | 18px |
+    | `Size/Control/lg/corner-radius` | `border-radius/lg` / `26px` | 10px | 26px |
+    | `Size/Control/xl/corner-radius` | `border-radius/xl` / `34px` | 14px | 34px |
+
+    ### min-width
+
+    | トークン | Standard | Comfortable | 備考 |
+    | --- | --- | --- | --- |
+    | `Size/Control/2xs/min-width` | 52px | 104px | min-width=4em |
+    | `Size/Control/xs/min-width` | 56px | 112px | min-width=4em |
+    | `Size/Control/sm/min-width` | 84px | 168px | min-width=6em |
+    | `Size/Control/md/min-width` | 96px | 192px | min-width=6em |
+    | `Size/Control/lg/min-width` | 96px | 192px | min-width=6em |
+    | `Size/Control/xl/min-width` | 132px | 264px | min-width=6em |
+  </Tab>
+</Tabs>

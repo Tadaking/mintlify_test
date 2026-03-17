@@ -23,7 +23,8 @@
             "group": "Foundation",
             "pages": [
               "colors",
-              "typography"
+              "typography",
+              "size"
             ]
           },
           {
