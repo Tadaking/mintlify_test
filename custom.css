@@ -1,6 +1,60 @@
 /* Google Fonts — Typography previews */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
+/* Typescale switcher (Standard / Comfortable tab) */
+.typescale-switcher {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e5e7eb;
+  background: #fff;
+  padding-top: 8px;
+}
+
+.dark .typescale-switcher {
+  background: #111827;
+}
+
+.typescale-switcher button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.typescale-switcher button:hover:not(.active) {
+  color: #374151;
+}
+
+.typescale-switcher button.active {
+  color: #00a724;
+  border-bottom-color: #00a724;
+}
+
+.dark .typescale-switcher {
+  border-bottom-color: #374151;
+}
+
+.dark .typescale-switcher button {
+  color: #9ca3af;
+}
+
+.dark .typescale-switcher button:hover:not(.active) {
+  color: #e5e7eb;
+}
+
+.dark .typescale-switcher button.active {
+  color: #028d1d;
+  border-bottom-color: #028d1d;
+}
+
 /* Typography preview block */
 .type-preview {
   border: 1px solid #e5e7eb;
