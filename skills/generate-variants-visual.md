@@ -5,6 +5,8 @@
 コンポーネントのSize・State・Shapeの各バリアントを横並びにしたFigmaフレームを生成し、
 スクリーンショットをMDXのバリアントセクションに挿入する。
 
+- 各バリアントのプレビューフレームをOverviewタブのバリアントセクションに生成する（`generate-variant-preview.md` として分離せず本スキルに含める）
+
 `generate-component-doc.md` からサブスキルとして呼び出されるほか、単独でも使用できる。
 
 ---
@@ -312,36 +314,120 @@ get_screenshot(frameNodeId)
 
 ---
 
-### Step 6: MDXへの挿入
+### Step 6b: バリアントプレビューフレームの生成（Overviewタブ用）
 
-出力先MDXの `## バリアント` セクション内、sizeテーブルの直後に以下の順で挿入する：
+各バリアントごとに1つのプレビューフレームを生成し、Overviewタブのバリアントセクションに挿入する。
+
+#### 6b-1: テンプレートの複製
+
+テンプレートURL: https://www.figma.com/design/Pvlx7A6oDLlnPF8MQYFDcq/Web-Components?node-id=5078-6521
+
+`variant` の値ごとにテンプレートを複製する。
+
+複製後：
+- フレーム名 → `{ComponentName}/Preview/{variant-name}`
+
+#### 6b-2: `#preview` エリアへのインスタンス配置
+
+`#preview` レイヤー（グレーのプレースホルダーエリア）に、そのバリアントの `intent` 全値を横並びに配置する。
+```javascript
+// #previewレイヤーを取得
+const previewLayer = templateInstance.findOne(n => n.name === '#preview');
+previewLayer.layoutMode = 'HORIZONTAL';
+previewLayer.itemSpacing = 16;
+previewLayer.paddingTop = previewLayer.paddingBottom = 24;
+previewLayer.paddingLeft = previewLayer.paddingRight = 24;
+previewLayer.primaryAxisSizingMode = 'AUTO';
+previewLayer.counterAxisSizingMode = 'AUTO';
+previewLayer.clipsContent = false;
+
+// intentの全値を横並びに配置（intentがない場合はdefaultのみ）
+const intents = intentValues.length > 0 ? intentValues : ['default'];
+
+for (const intent of intents) {
+  const instance = component.createInstance();
+  const setProps = { variant: variantValue, size: 'md' };
+  if (intent !== 'default') setProps.intent = intent;
+
+  // 装飾系booleanをオフ
+  const validProps = Object.fromEntries(
+    Object.entries(setProps).filter(([key]) => key in instance.componentProperties)
+  );
+  instance.setProperties(validProps);
+
+  const booleanProps = Object.entries(instance.componentProperties)
+    .filter(([key, prop]) =>
+      prop.type === 'BOOLEAN' &&
+      prop.value === true &&
+      !['focused', 'isDisabled', 'isPending'].includes(key)
+    );
+  for (const [key] of booleanProps) {
+    instance.setProperties({ [key]: false });
+  }
+
+  if ('clipsContent' in instance) instance.clipsContent = false;
+  previewLayer.appendChild(instance);
+}
+```
+
+#### 6b-3: スクリーンショットの取得と保存
+
+各プレビューフレームのnode IDを確認してからスクリーンショットを取得する。
+```
+get_screenshot(previewFrameNodeId)
+```
+
+保存先：`images/{component-name}-variant-{variant-name}-light.png`
+
+**重要：** 戻り値を直接使わず、必ずファイルとして保存してからパスを参照する。
+
+#### 6b-4: MDXへの挿入
+
+Overviewタブの `## バリアント` セクション内、各バリアントの説明文の直後・when-to-useの直前に挿入する：
 ```md
-## バリアント
+### {VariantName}
 
-### Size
+{optional-description}
+
+<!-- figma-frame: FILE_KEY/NODE_ID | {VariantName} プレビュー -->
+![{VariantName}](/images/{component-name}-variant-{variant-name}-light.png)
+
+✅ いつ使う
+- ...
+
+❌ いつ使わない
+- ...
+```
+
+`_guidelines/variants/{variant-name}` が存在する場合は when-to-use / when-not-to-use を読み取って挿入する。存在しない場合は `<!-- TODO: _guidelines フレームを追加後に更新 -->` を挿入する。
+
+---
+
+### Step 7: MDXへの挿入
+
+WebタブのMDXに以下の順で挿入する。
+`## Size・State・Shape ビジュアル` という親見出しは作らない。
+Size / State / Shape はそれぞれ `##` レベルの独立した見出しにする。
+```md
+## Size
 
 ![Button Size](/images/button-size-light.png)
 
 | サイズ | 用途 |
 |---|---|
 | sm | （説明） |
-| md | （説明） |
-| lg | （説明） |
-| xl | （説明） |
+...
 
-### State
+## State
 
 ![Button State](/images/button-state-light.png)
 
 | ステート | 説明 |
 |---|---|
 | Default | 通常状態 |
-| Hover | カーソルが乗っている状態 |
-| Pressed | クリック・タップ中の状態 |
-| Focused | キーボードフォーカス状態 |
-| Disabled | 操作不可状態。`opacity: 0.4` を適用 |
+...
 
-### Shape
+## Shape
 
 ![Button Shape](/images/button-shape-light.png)
 
@@ -350,7 +436,7 @@ get_screenshot(frameNodeId)
 | Default | 標準の角丸 |
 | Full radius | ピル型。角丸を最大にした形状 |
 
-### その他のプロパティ
+## その他のプロパティ
 
 | プロパティ | 説明 |
 |---|---|
