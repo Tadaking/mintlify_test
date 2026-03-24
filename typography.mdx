@@ -47,11 +47,12 @@ export const SP = ({ name, std, cmf, w }) => {
   );
 };
 
-export const BP = ({ name, std, cmf }) => {
+export const BP = ({ name, std, cmf, ls }) => {
   const scale = React.useContext(ScaleCtx);
   const [sz, lhs] = scale === 'standard' ? std : cmf;
   const [mode, setMode] = React.useState('standard');
   const lh = lhs[mode];
+  const lsVal = ls ? (scale === 'standard' ? ls.std : ls.cmf) : 0;
   const labels = { comfortable: 'Comfortable', standard: 'Standard', compact: 'Compact' };
   return (
     <div className="type-preview type-preview--wrap">
@@ -63,11 +64,11 @@ export const BP = ({ name, std, cmf }) => {
           ))}
         </select>
       </div>
-      <div className="type-preview-sample-jp" style={{fontSize: sz+'px', fontWeight: 400, lineHeight: lh+'px'}}>{JP_BODY}</div>
+      <div className="type-preview-sample-jp" style={{fontSize: sz+'px', fontWeight: 400, lineHeight: lh+'px', letterSpacing: lsVal+'px'}}>{JP_BODY}</div>
       <div className="type-preview-font">Noto Sans JP</div>
-      <div className="type-preview-sample-en" style={{fontSize: sz+'px', fontWeight: 400, lineHeight: lh+'px'}}>{EN_BODY}</div>
+      <div className="type-preview-sample-en" style={{fontSize: sz+'px', fontWeight: 400, lineHeight: lh+'px', letterSpacing: lsVal+'px'}}>{EN_BODY}</div>
       <div className="type-preview-font">Inter</div>
-      <div className="type-preview-specs">サイズ: {sz}px / {toRem(sz)}　ウェイト: {WL[400]}　行間: {lh}px / {toRem(lh)}</div>
+      <div className="type-preview-specs">サイズ: {sz}px / {toRem(sz)}　ウェイト: {WL[400]}　行間: {lh}px / {toRem(lh)}　字間: {lsVal}px</div>
     </div>
   );
 };
@@ -342,11 +343,11 @@ export const BP = ({ name, std, cmf }) => {
 
     行間は Comfortable（ゆるめ）、Standard（標準）、Compact（狭め）の3種類から選べます。プルダウンで切り替えて行間の違いを確認できます。
 
-    <BP name="body-lg" std={[18, {comfortable: 32, standard: 28, compact: 24}]} cmf={[36, {comfortable: 56, standard: 44, compact: 40}]} />
+    <BP name="body-lg" std={[18, {comfortable: 32, standard: 28, compact: 24}]} cmf={[36, {comfortable: 56, standard: 44, compact: 40}]} ls={{std: 0, cmf: -0.3}} />
 
-    <BP name="body-md" std={[16, {comfortable: 28, standard: 24, compact: 20}]} cmf={[32, {comfortable: 52, standard: 40, compact: 36}]} />
+    <BP name="body-md" std={[16, {comfortable: 28, standard: 24, compact: 20}]} cmf={[32, {comfortable: 52, standard: 40, compact: 36}]} ls={{std: 0, cmf: -0.2}} />
 
-    <BP name="body-sm" std={[14, {comfortable: 24, standard: 20, compact: 16}]} cmf={[28, {comfortable: 48, standard: 36, compact: 32}]} />
+    <BP name="body-sm" std={[14, {comfortable: 24, standard: 20, compact: 16}]} cmf={[28, {comfortable: 48, standard: 36, compact: 32}]} ls={{std: 0, cmf: -0.15}} />
 
     ## Label
 
@@ -365,6 +366,112 @@ export const BP = ({ name, std, cmf }) => {
     <SP name="caption-sm" std={[11, 16]} cmf={[22, 28]} w={400} />
 
     </ScaleSwitch>
+
+    # Token reference
+
+    Pattern-Web コレクションの全タイポグラフィトークン値です。モードを切り替えることで、各スケールでの値を確認できます。
+
+    ## Big Title
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `big-title/size` | 102 | 128 | 42 |
+    | `big-title/line-height` | 120 | 160 | 52 |
+    | `big-title/letter-spacing` | 0 | 0 | 0 |
+
+    ## Display
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `display/size/lg` | 64 | 102 | 32 |
+    | `display/size/md` | 42 | 84 | 26 |
+    | `display/size/sm` | 32 | 64 | 22 |
+    | `display/size/xs` | 26 | 52 | 20 |
+    | `display/line-height/lg` | 76 | 120 | 36 |
+    | `display/line-height/md` | 52 | 96 | 32 |
+    | `display/line-height/sm` | 40 | 76 | 28 |
+    | `display/line-height/xs` | 36 | 64 | 24 |
+    | `display/letter-spacing/lg` | 0 | 0 | 0 |
+    | `display/letter-spacing/md` | 0 | 0 | 0 |
+    | `display/letter-spacing/sm` | 0 | 0 | 0 |
+    | `display/letter-spacing/xs` | 0 | 0 | 0 |
+
+    ## Title
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `title/size/xl` | 32 | 64 | 22 |
+    | `title/size/lg` | 26 | 52 | 20 |
+    | `title/size/md` | 22 | 44 | 18 |
+    | `title/size/sm` | 18 | 36 | 16 |
+    | `title/size/xs` | 16 | 32 | 14 |
+    | `title/size/2xs` | 14 | 28 | 13 |
+    | `title/line-height/xl` | 40 | 77 | 28 |
+    | `title/line-height/lg` | 36 | 64 | 24 |
+    | `title/line-height/md` | 28 | 56 | 24 |
+    | `title/line-height/sm` | 24 | 44 | 20 |
+    | `title/line-height/xs` | 24 | 40 | 16 |
+    | `title/line-height/2xs` | 20 | 36 | 16 |
+    | `title/letter-spacing/xl` | 0 | 0 | 0 |
+    | `title/letter-spacing/lg` | 0 | 0 | 0 |
+    | `title/letter-spacing/md` | 0 | 0 | 0 |
+    | `title/letter-spacing/sm` | 0 | 0 | 0 |
+    | `title/letter-spacing/xs` | 0 | 0 | 0 |
+    | `title/letter-spacing/2xs` | 0 | 0 | 0 |
+
+    ## Body
+
+    Size と letter-spacing は Body / Body-Comfortable / Body-Compact で共通です。行間のみ density ごとに異なります。
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `body/size/lg` | 18 | 36 | 16 |
+    | `body/size/md` | 16 | 32 | 14 |
+    | `body/size/sm` | 14 | 28 | 13 |
+    | `body/line-height/standard/lg` | 28 | 44 | 24 |
+    | `body/line-height/standard/md` | 24 | 40 | 20 |
+    | `body/line-height/standard/sm` | 20 | 36 | 20 |
+    | `body/line-height/comfortable/lg` | 32 | 56 | 28 |
+    | `body/line-height/comfortable/md` | 28 | 52 | 24 |
+    | `body/line-height/comfortable/sm` | 24 | 48 | 24 |
+    | `body/line-height/compact/lg` | 24 | 40 | 24 |
+    | `body/line-height/compact/md` | 20 | 36 | 20 |
+    | `body/line-height/compact/sm` | 16 | 32 | 16 |
+    | `body/letter-spacing/lg` | 0 | -0.3 | 0 |
+    | `body/letter-spacing/md` | 0 | -0.2 | 0 |
+    | `body/letter-spacing/sm` | 0 | -0.15 | 0 |
+
+    ## Label
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `label/size/lg` | 18 | 36 | 16 |
+    | `label/size/md` | 16 | 32 | 14 |
+    | `label/size/sm` | 14 | 28 | 13 |
+    | `label/size/xs` | 13 | 26 | 12 |
+    | `label/line-height/lg` | 28 | 56 | 24 |
+    | `label/line-height/md` | 24 | 44 | 20 |
+    | `label/line-height/sm` | 20 | 40 | 20 |
+    | `label/line-height/xs` | 16 | 36 | 16 |
+    | `label/letter-spacing/lg` | 0 | 0 | 0 |
+    | `label/letter-spacing/md` | 0 | 0 | 0 |
+    | `label/letter-spacing/sm` | 0 | 0 | 0 |
+    | `label/letter-spacing/xs` | 0 | 0 | 0 |
+
+    ## Caption
+
+    | トークン | Standard | Comfortable | Dense |
+    | --- | --- | --- | --- |
+    | `caption/size/md` | 12 | 24 | 12 |
+    | `caption/size/sm` | 11 | 22 | 11 |
+    | `caption/line-height/md` | 16 | 32 | 16 |
+    | `caption/line-height/sm` | 16 | 28 | 16 |
+    | `caption/letter-spacing/md` | 0 | 0 | 0 |
+    | `caption/letter-spacing/sm` | 0 | 0 | 0 |
+
+    <Note>
+      トークン名のプレフィックス `Typography/` は省略しています。すべて Pattern-Web コレクションに属します。単位は px です。
+    </Note>
   </Tab>
   <Tab title="Android">
     Google の Material Design 3 に準拠します。
