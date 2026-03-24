@@ -117,18 +117,13 @@ parent.appendChild(line);
 - **上**: 始点 = 要素上端中心、終点 = バッジ下端中心（垂直線）
 - **下**: 始点 = 要素下端中心、終点 = バッジ上端中心（垂直線）
 
-### Step 6: スクリーンショットの取得と保存
+### Step 6: 画像の書き出しと保存
 
-複製したAnatomyフレームのnode IDを確認してから実行する（元のコンポーネントやテンプレートのnode IDを使わない）。
-```
-get_screenshot(anatomyFrameNodeId)
-```
+Figma Console MCP の `figma_get_component_image` を使って生成したAnatomyフレームを書き出す。
 
-**重要：** `get_screenshot` の戻り値をClaudeに直接渡さない。必ず以下の手順でファイルとして保存してからパスを参照する：
-
-1. 戻り値の画像データを `images/button-anatomy-light.png` としてファイルに書き出す
-2. 保存されたファイルパスをMDXで参照する
-3. 画像データをそのままAPIに送ると `400 Could not process image` エラーが発生するため絶対に行わない
+- 対象：生成した `{ComponentName}/Anatomy` フレームのnode ID
+- 保存先：`images/{component-name}-anatomy-light.png`
+- `get_screenshot` / `figma_execute` での base64 エクスポートは使わない
 
 ### Step 7: MDXへの挿入
 

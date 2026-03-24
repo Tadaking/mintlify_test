@@ -245,6 +245,27 @@ export const BP = ({ name, std, cmf }) => {
         <div class="do-dont-caption">proportional-nums では「1」入力時にテキスト幅が縮み、修正時のカーソル合わせが難しくなる。</div>
       </div>
     </div>
+
+    ## 6. テーブル内の小数点桁数の統一
+
+    小数点を含む数値が並ぶテーブルでは、桁数を揃えて表示することで小数点の位置が縦に揃い、値の比較がしやすくなります。
+
+    <div class="do-dont-grid">
+      <div class="do-card">
+        <div class="do-dont-label">✅ Do</div>
+        <div class="do-dont-preview">
+          <img src="/images/typography-tabular-do-decimal.png" alt="小数点の桁数を揃えたテーブル" />
+        </div>
+        <div class="do-dont-caption">すべての値を小数第2位に揃えて表示。小数点の位置が縦に揃い、金額の比較がしやすい。</div>
+      </div>
+      <div class="dont-card">
+        <div class="do-dont-label">❌ Don't</div>
+        <div class="do-dont-preview">
+          <img src="/images/typography-tabular-dont-decimal.png" alt="小数点の桁数がバラバラのテーブル" />
+        </div>
+        <div class="do-dont-caption">桁数がバラバラ（¥1,200 / ¥340.5 / ¥15,800.75）だと小数点の位置が揃わず、値の比較に時間がかかる。</div>
+      </div>
+    </div>
   </Tab>
   <Tab title="Web">
     ## Type scale

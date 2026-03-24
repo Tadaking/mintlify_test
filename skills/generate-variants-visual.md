@@ -298,19 +298,14 @@ for (const s of shapes) {
 
 ---
 
-### Step 5: スクリーンショットの取得と保存
+### Step 5: 画像の書き出しと保存
 
-生成した各フレームのnode IDを確認してからスクリーンショットを取得する。
-```
-get_screenshot(frameNodeId)
-```
+Figma Console MCP の `figma_get_component_image` を使って各フレームを書き出す。
 
-保存先：
-- `images/{component-name}-size-light.png`
-- `images/{component-name}-state-light.png`
-- `images/{component-name}-shape-light.png`
-
-**重要：** `get_screenshot` の戻り値を直接使わず、必ずファイルとして保存してからパスを参照する。
+- Size フレーム → `images/{component-name}-size-light.png`
+- State フレーム → `images/{component-name}-state-light.png`
+- Shape フレーム → `images/{component-name}-shape-light.png`
+- `get_screenshot` / `figma_execute` での base64 エクスポートは使わない
 
 ---
 
@@ -370,16 +365,12 @@ for (const intent of intents) {
 }
 ```
 
-#### 6b-3: スクリーンショットの取得と保存
+#### 6b-3: 画像の書き出しと保存
 
-各プレビューフレームのnode IDを確認してからスクリーンショットを取得する。
-```
-get_screenshot(previewFrameNodeId)
-```
+Figma Console MCP の `figma_get_component_image` を使って各プレビューフレームを書き出す。
 
-保存先：`images/{component-name}-variant-{variant-name}-light.png`
-
-**重要：** 戻り値を直接使わず、必ずファイルとして保存してからパスを参照する。
+- 保存先：`images/{component-name}-variant-{variant-name}-light.png`
+- `get_screenshot` / `figma_execute` での base64 エクスポートは使わない
 
 #### 6b-4: MDXへの挿入
 

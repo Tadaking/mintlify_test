@@ -126,9 +126,10 @@ for (const { variant, intent } of components) {
 
 4. フレーム名を `{ComponentName}/Combinations/{do|dont|caution}-{n}` にする
 
-5. スクリーンショットを取得して保存する：
+5. Figma Console MCP の `figma_get_component_image` を使って各フレームを書き出す：
    - 保存先：`images/{component-name}-combination-{do|dont|caution}-{n}-light.png`
-   - 戻り値を直接使わず、必ずファイルとして保存してからパスを参照する
+   - `get_screenshot` / `figma_execute` での base64 エクスポートは使わない
+   - 書き出し後にファイルサイズが正常か確認する
 
 6. MDXの `## 組み合わせパターン` セクションに挿入する：
 ```md
