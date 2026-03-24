@@ -10,8 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if update entries increased
+        id: check
+        run: |
+          CURRENT=$(grep -c '<Update ' index.mdx || echo 0)
+          PREVIOUS=$(git show HEAD~1:index.mdx 2>/dev/null | grep -c '<Update ' || echo 0)
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
+          if [ "$CURRENT" -gt "$PREVIOUS" ]; then
+            echo "should_notify=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_notify=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Extract latest update
+        if: steps.check.outputs.should_notify == 'true'
         id: extract
         run: |
           # 最新の <Update> から description と本文を抽出
@@ -21,6 +37,7 @@ jobs:
           echo "body=$BODY" >> "$GITHUB_OUTPUT"
 
       - name: Send to Slack
+        if: steps.check.outputs.should_notify == 'true'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
